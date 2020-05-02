@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:root {
+  font-family: Josefin Sans;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #2cb65b;
+}
+
+.score {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  opacity: 30%;
+  font-size: 500px;
+  z-index: -1;
+  color: white;
+}
+
+.block {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  /*transform: translate(-50%, -50%);*/
+  border-radius: 100%;
+}
+
+.snake-block {
+  background: white;
+  z-index: 10000;
+  -webkit-transition: left 100ms, top 100ms;
+  transition: left 100ms, top 100ms;
+}
+
+.apple {
+  background: #f6b946;
+  -webkit-animation: apple-appear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
+          animation: apple-appear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
+}
+
+.apple-disappear {
+  -webkit-animation: apple-disappear 100ms;
+          animation: apple-disappear 100ms;
+}
+
+.ULOST {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 200px;
+  color: red;
+  border: 20px white dotted;
+  display: none;
+  z-index: 20000;
+}
+
+@-webkit-keyframes apple-appear {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes apple-appear {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes apple-disappear {
+  from {
+  }
+  to {
+  }
+}
+
+@keyframes apple-disappear {
+  from {
+  }
+  to {
+  }
+}
+/*# sourceMappingURL=main.css.map */
