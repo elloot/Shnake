@@ -123,6 +123,8 @@ class SnakeBlock {
         this.previousX = this.x;
         this.previousY = this.y;
 
+        gameboard.addAvailableSpot(this.previousX, this.previousY);
+
         if (frontX) {
             //checks in which direction block is moving
             this.vx = frontX - this.x;
@@ -142,6 +144,8 @@ class SnakeBlock {
             this.x += this.vx * this.size;
             this.y += this.vy * this.size;
         }
+
+        gameboard.removeAvailableSpot(this.x, this.y);
 
         //actually moves block
         this.element.style.left = this.x + "px";
