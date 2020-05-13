@@ -84,21 +84,10 @@ class Apple {
         this.element = document.createElement("div");
         this.element.classList.add("apple", "block");
 
-        this.x = gameboard.leftBound + round(Math.random() * gameboard.rightBound, this.size);
+        const spotIndex = Math.round(Math.random() * gameboard.availableSpots.length);
 
-        if (this.x < gameboard.leftBound) {
-            this.x += this.size;
-        } else if (this.x > gameboard.rightBound) {
-            this.x -= this.size;
-        }
-
-        this.y = gameboard.topBound + round(Math.random() * gameboard.bottomBound, this.size);
-
-        if (this.y < gameboard.topBound) {
-            this.y += this.size;
-        } else if (this.y > gameboard.bottomBound) {
-            this.y -= this.size;
-        }
+        this.x = gameboard.availableSpots[spotIndex].x;
+        this.y = gameboard.availableSpots[spotIndex].y;
 
         this.element.style.width = this.size + "px";
         this.element.style.height = this.size + "px";
