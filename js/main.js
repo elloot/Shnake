@@ -61,8 +61,21 @@ class Apple {
         this.element = document.createElement("div");
         this.element.classList.add("apple", "block");
 
-        this.x = round(Math.random() * (document.body.clientWidth - this.size), snake.size);
-        this.y = round(Math.random() * (document.body.clientHeight - this.size), snake.size);
+        this.x = gameboard.leftBound + round(Math.random() * gameboard.rightBound, this.size);
+
+        if (this.x < gameboard.leftBound) {
+            this.x += this.size;
+        } else if (this.x > gameboard.rightBound) {
+            this.x -= this.size;
+        }
+
+        this.y = gameboard.topBound + round(Math.random() * gameboard.bottomBound, this.size);
+
+        if (this.y < gameboard.topBound) {
+            this.y += this.size;
+        } else if (this.y > gameboard.bottomBound) {
+            this.y -= this.size;
+        }
 
         this.element.style.width = this.size + "px";
         this.element.style.height = this.size + "px";
@@ -187,6 +200,9 @@ window.addEventListener(
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y > snake.firstBlock.y) break;
 
                     snake.setYDirection(1);
+                    break;
+                case "Alt":
+                    for (i = 0; i < 100; i++) apple.place();
                     break;
             }
         });
