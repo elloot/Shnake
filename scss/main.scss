@@ -16,6 +16,9 @@ body {
     height: 100vh;
     overflow: hidden;
     background: $clr-green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .score {
@@ -50,6 +53,12 @@ body {
 
 .apple-disappear {
     animation: apple-disappear 100ms;
+}
+
+.gameboard {
+    border: white 2px solid;
+    position: relative;
+    margin: auto;
 }
 
 .ULOST {
