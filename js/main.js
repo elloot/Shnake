@@ -162,7 +162,7 @@ window.addEventListener(
     () => {
         // window.requestAnimationFrame(runSnake);
 
-        const interval = window.prompt("HOW QUICK U WANT GAME? WE RECMND 150", 150);
+        const interval = parseFloat(window.prompt("HOW QUICK U WANT GAME? WE RECMND 150", 150));
 
         intervalID = setInterval(runSnake, interval);
 
