@@ -135,8 +135,7 @@ class SnakeBlock {
         } else {
             //game over detector
             if (this.x + this.vx * this.size >= gameboard.width || this.x + this.vx * this.size < 0 || this.y + this.vy * this.size < 0 || this.y + this.vy * this.size >= gameboard.height || isSelfcolliding(this.blockBehind, this)) {
-                clearInterval(intervalID);
-                document.querySelector(".ULOST").style.display = "block";
+                endGame();
                 return;
             }
 
@@ -170,20 +169,23 @@ let gameboard = new Gameboard(document.body.clientHeight, document.body.clientWi
 
 const snake = new Snake(parseFloat(window.prompt("HOW THICC 🍑 SHOULD SHNAKE BE? WE RECMND 50", 50)));
 
+const updateInterval = parseFloat(window.prompt("HOW QUICK U WANT GAME? WE RECMND 150", 150));
+
 let apple = new Apple();
 apple.place();
 
-let intervalID;
 let score = 0;
+
+let running;
+
+let lastTime = new Date().getTime();
+let deltaUpdate = 0;
 
 window.addEventListener(
     "load",
     () => {
-        // window.requestAnimationFrame(runSnake);
-
-        const interval = parseFloat(window.prompt("HOW QUICK U WANT GAME? WE RECMND 150", 150));
-
-        intervalID = setInterval(runSnake, interval);
+        running = true;
+        window.requestAnimationFrame(runSnake);
 
         document.addEventListener("keydown", (e) => {
             switch (e.key) {
@@ -227,16 +229,28 @@ function round(toRound, roundTo) {
 function isSelfcolliding(currentBlock, foremostBlock) {
     while (currentBlock) {
         if (currentBlock.x === foremostBlock.x + foremostBlock.vx * foremostBlock.size && currentBlock.y === foremostBlock.y + foremostBlock.vy * foremostBlock.size) {
-            clearInterval(intervalID);
-            document.querySelector(".ULOST").style.display = "block";
             return true;
         }
         currentBlock = currentBlock.blockBehind;
     }
 }
 
-function runSnake() {
-    snake.update();
+function endGame() {
+    running = false;
+    document.querySelector(".ULOST").style.display = "block";
+}
 
-    // window.requestAnimationFrame(runSnake);
+function runSnake() {
+    let currentTime = new Date().getTime();
+    deltaUpdate += (currentTime - lastTime) / updateInterval;
+    lastTime = currentTime;
+
+    while (deltaUpdate >= 1) {
+        deltaUpdate--;
+        snake.update();
+    }
+
+    if (running) {
+        window.requestAnimationFrame(runSnake);
+    }
 }
