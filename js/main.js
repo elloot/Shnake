@@ -25,6 +25,14 @@ class Snake {
     }
 }
 
+class Gameboard {
+    constructor(clientHeight, clientWidth) {
+        this.height = round(clientHeight, 50);
+        this.width = round(clientWidth, 50);
+        (clientWidth - this.width) / 2;
+    }
+}
+
 class Apple {
     constructor() {
         this.size = snake.size;
@@ -165,7 +173,7 @@ window.addEventListener(
 
 function round(toRound, roundTo) {
     if (toRound > 0) {
-        return Math.ceil(toRound / roundTo) * roundTo;
+        return Math.floor(toRound / roundTo) * roundTo;
     } else {
         return roundTo;
     }
