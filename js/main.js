@@ -42,8 +42,6 @@ class Gameboard {
         this.element.style.height = this.height + "px";
         this.element.style.minHeight = this.height + "px";
 
-        this.updateBounds();
-
         this.availableSpots = [];
 
         for (let y = 0; y < this.height; y += 50) {
