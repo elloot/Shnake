@@ -3,6 +3,8 @@ class Snake {
         this.size = size;
         this.firstBlock = new SnakeBlock(gameboard.leftBound + this.size /*document.body.clientWidth / 2*/, gameboard.topBound + this.size /*document.body.clientHeight / 2*/, this.size);
         this.lastBlock = this.firstBlock;
+
+        gameboard.removeAvailableSpot(this.firstBlock.x, this.firstBlock.y);
     }
     addBlock() {
         this.lastBlockSave = this.lastBlock;
@@ -49,6 +51,27 @@ class Gameboard {
         console.log("Leftbound: " + this.leftBound);
         console.log("Bottombound: " + this.bottomBound);
         console.log("Topbound: " + this.topBound);
+
+        this.availableSpots = [];
+
+        for (let y = this.topBound; y < this.bottomBound; y += 50) {
+            for (let x = this.leftBound; x < this.rightBound; x += 50) {
+                this.addAvailableSpot(x, y);
+            }
+        }
+    }
+
+    addAvailableSpot(x, y) {
+        this.availableSpots.push({ x: x, y: y });
+    }
+
+    removeAvailableSpot(x, y) {
+        for (let i = 0; i < this.availableSpots.length; i++) {
+            if (this.availableSpots[i].x === x && this.availableSpots[i].y === y) {
+                this.availableSpots.splice(i, 1);
+                break;
+            }
+        }
     }
 }
 
