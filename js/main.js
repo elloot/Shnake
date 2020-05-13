@@ -1,7 +1,7 @@
 class Snake {
     constructor(size) {
         this.size = size;
-        this.firstBlock = new SnakeBlock(document.body.clientWidth / 2, document.body.clientHeight / 2, this.size);
+        this.firstBlock = new SnakeBlock(gameboard.leftBound + this.size /*document.body.clientWidth / 2*/, gameboard.topBound + this.size /*document.body.clientHeight / 2*/, this.size);
         this.lastBlock = this.firstBlock;
     }
     addBlock() {
@@ -27,9 +27,28 @@ class Snake {
 
 class Gameboard {
     constructor(clientHeight, clientWidth) {
-        this.height = round(clientHeight, 50);
-        this.width = round(clientWidth, 50);
-        (clientWidth - this.width) / 2;
+        this.bottomBound = round(clientHeight, 50) - (clientHeight - round(clientHeight, 50)) / 2;
+        this.topBound = (clientHeight - round(clientHeight, 50)) / 2;
+        this.rightBound = round(clientWidth, 50) - (clientWidth - round(clientWidth, 50)) / 2;
+        this.leftBound = (clientWidth - round(clientWidth, 50)) / 2;
+
+        this.element = document.createElement("div");
+
+        this.element.style.width = round(clientWidth, 50) + "px";
+        this.element.style.height = round(clientHeight, 50) + "px";
+
+        this.element.style.position = "absolute";
+        this.element.style.left = this.leftBound + "px";
+        this.element.style.top = this.topBound + "px";
+
+        this.element.style.border = "white 1px solid";
+
+        document.body.appendChild(this.element);
+
+        console.log("Rightbound: " + this.rightBound);
+        console.log("Leftbound: " + this.leftBound);
+        console.log("Bottombound: " + this.bottomBound);
+        console.log("Topbound: " + this.topBound);
     }
 }
 
@@ -64,8 +83,8 @@ class Apple {
 class SnakeBlock {
     constructor(x, y, size) {
         this.size = size;
-        this.x = round(x, size);
-        this.y = round(y, size);
+        this.x = x /*round(x, size)*/;
+        this.y = y /*round(y, size)*/;
 
         this.vx = 0;
         this.vy = 0;
@@ -98,7 +117,7 @@ class SnakeBlock {
             this.y = frontY;
         } else {
             //game over detector
-            if (this.x + this.vx * this.size > document.body.clientWidth || this.x + this.vx * this.size < 0 || this.y + this.vy * this.size < 0 || this.y + this.vy * this.size > document.body.clientHeight || isSelfcolliding(this.blockBehind, this)) {
+            if (this.x + this.vx * this.size > gameboard.rightBound /*document.body.clientWidth*/ || this.x + this.vx * this.size < gameboard.leftBound /*0*/ || this.y + this.vy * this.size < gameboard.topBound /*0*/ || this.y + this.vy * this.size > gameboard.bottomBound /*document.body.clientHeight*/ || isSelfcolliding(this.blockBehind, this)) {
                 clearInterval(intervalID);
                 document.querySelector(".ULOST").style.display = "block";
                 return;
@@ -128,9 +147,13 @@ class SnakeBlock {
     }
 }
 
-const snake = new Snake(window.prompt("HOW THICC 🍑 SHOULD SHNAKE BE? WE RECMND 50", 50));
+let gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
+
+const snake = new Snake(parseFloat(window.prompt("HOW THICC 🍑 SHOULD SHNAKE BE? WE RECMND 50", 50)));
+
 let apple = new Apple();
 apple.place();
+
 let intervalID;
 let score = 0;
 
