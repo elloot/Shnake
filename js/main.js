@@ -1,7 +1,9 @@
 class Snake {
     constructor(size) {
         this.size = size;
-        this.firstBlock = new SnakeBlock(gameboard.leftBound + this.size /*document.body.clientWidth / 2*/, gameboard.topBound + this.size /*document.body.clientHeight / 2*/, this.size);
+
+        console.log(gameboard.leftBound + this.size, gameboard.topBound + this.size);
+        this.firstBlock = new SnakeBlock(this.size, this.size, this.size);
         this.lastBlock = this.firstBlock;
 
         gameboard.removeAvailableSpot(this.firstBlock.x, this.firstBlock.y);
@@ -29,33 +31,23 @@ class Snake {
 
 class Gameboard {
     constructor(clientHeight, clientWidth) {
-        this.bottomBound = round(clientHeight, 50) - (clientHeight - round(clientHeight, 50)) / 2;
-        this.topBound = (clientHeight - round(clientHeight, 50)) / 2;
-        this.rightBound = round(clientWidth, 50) - (clientWidth - round(clientWidth, 50)) / 2;
-        this.leftBound = (clientWidth - round(clientWidth, 50)) / 2;
+        this.width = round(clientWidth, 50);
+        this.height = round(clientHeight, 50);
 
-        this.element = document.createElement("div");
+        this.element = document.querySelector(".gameboard");
 
-        this.element.style.width = round(clientWidth, 50) + "px";
-        this.element.style.height = round(clientHeight, 50) + "px";
+        this.element.style.width = this.width + "px";
+        this.element.style.minWidth = this.width + "px";
 
-        this.element.style.position = "absolute";
-        this.element.style.left = this.leftBound + "px";
-        this.element.style.top = this.topBound + "px";
+        this.element.style.height = this.height + "px";
+        this.element.style.minHeight = this.height + "px";
 
-        this.element.style.border = "white 1px solid";
-
-        document.body.appendChild(this.element);
-
-        console.log("Rightbound: " + this.rightBound);
-        console.log("Leftbound: " + this.leftBound);
-        console.log("Bottombound: " + this.bottomBound);
-        console.log("Topbound: " + this.topBound);
+        this.updateBounds();
 
         this.availableSpots = [];
 
-        for (let y = this.topBound; y < this.bottomBound; y += 50) {
-            for (let x = this.leftBound; x < this.rightBound; x += 50) {
+        for (let y = 0; y < this.height; y += 50) {
+            for (let x = 0; x < this.width; x += 50) {
                 this.addAvailableSpot(x, y);
             }
         }
@@ -94,22 +86,22 @@ class Apple {
 
         this.element.addEventListener("animationend", (e) => {
             if (e.animationName === "apple-disappear") {
-                document.body.removeChild(e.target);
+                gameboard.element.removeChild(e.target);
             }
         });
 
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
 
-        document.body.appendChild(this.element);
+        gameboard.element.appendChild(this.element);
     }
 }
 
 class SnakeBlock {
     constructor(x, y, size) {
         this.size = size;
-        this.x = x /*round(x, size)*/;
-        this.y = y /*round(y, size)*/;
+        this.x = x;
+        this.y = y;
 
         this.vx = 0;
         this.vy = 0;
@@ -125,7 +117,7 @@ class SnakeBlock {
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
 
-        document.body.appendChild(this.element);
+        gameboard.element.appendChild(this.element);
     }
 
     move(frontX, frontY) {
@@ -142,7 +134,7 @@ class SnakeBlock {
             this.y = frontY;
         } else {
             //game over detector
-            if (this.x + this.vx * this.size > gameboard.rightBound /*document.body.clientWidth*/ || this.x + this.vx * this.size < gameboard.leftBound /*0*/ || this.y + this.vy * this.size < gameboard.topBound /*0*/ || this.y + this.vy * this.size > gameboard.bottomBound /*document.body.clientHeight*/ || isSelfcolliding(this.blockBehind, this)) {
+            if (this.x + this.vx * this.size >= gameboard.width || this.x + this.vx * this.size < 0 || this.y + this.vy * this.size < 0 || this.y + this.vy * this.size >= gameboard.height || isSelfcolliding(this.blockBehind, this)) {
                 clearInterval(intervalID);
                 document.querySelector(".ULOST").style.display = "block";
                 return;
