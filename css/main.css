@@ -80,6 +80,19 @@ body {
   z-index: 20000;
 }
 
+.UWON {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 200px;
+  color: red;
+  border: 20px yellow dotted;
+  display: none;
+  z-index: 20000;
+}
+
 @-webkit-keyframes apple-appear {
   from {
     -webkit-transform: scale(0);
