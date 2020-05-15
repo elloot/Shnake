@@ -208,21 +208,25 @@ window.addEventListener(
 
         document.addEventListener("keydown", (e) => {
             switch (e.key) {
+                case "a":
                 case "ArrowLeft":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x < snake.firstBlock.x) break;
 
                     snake.setXDirection(-1);
                     break;
+                case "d":
                 case "ArrowRight":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x > snake.firstBlock.x) break;
 
                     snake.setXDirection(1);
                     break;
+                case "w":
                 case "ArrowUp":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y < snake.firstBlock.y) break;
 
                     snake.setYDirection(-1);
                     break;
+                case "s":
                 case "ArrowDown":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y > snake.firstBlock.y) break;
 
