@@ -153,7 +153,7 @@ class SnakeBlock {
             this.y = frontY;
         } else {
             //game over detector
-            if (this.x + this.vx * this.blockSize >= gameboard.width || this.x + this.vx * this.blockSize < 0 || this.y + this.vy * this.blockSize < 0 || this.y + this.vy * this.blockSize >= gameboard.height || this.blockBehind != undefined ? isSelfcolliding(this) : false) {
+            if (isWallColliding(this) || (this.blockBehind != undefined ? isSelfcolliding(this) : false)) {
                 game.end(false);
                 return;
             }
@@ -256,6 +256,10 @@ function isSelfcolliding(currentBlock) {
         currentBlock = currentBlock.blockBehind;
     }
     return false;
+}
+
+function isWallColliding(headBlock) {
+    return headBlock.x + headBlock.vx * headBlock.blockSize >= gameboard.width || headBlock.x + headBlock.vx * headBlock.blockSize < 0 || headBlock.y + headBlock.vy * headBlock.blockSize < 0 || headBlock.y + headBlock.vy * headBlock.blockSize >= gameboard.height;
 }
 
 function runSnake() {
