@@ -153,7 +153,7 @@ class SnakeBlock {
             this.y = frontY;
         } else {
             //game over detector
-            if (this.x + this.vx * this.blockSize >= gameboard.width || this.x + this.vx * this.blockSize < 0 || this.y + this.vy * this.blockSize < 0 || this.y + this.vy * this.blockSize >= gameboard.height || isSelfcolliding(this.blockBehind, this)) {
+            if (this.x + this.vx * this.blockSize >= gameboard.width || this.x + this.vx * this.blockSize < 0 || this.y + this.vy * this.blockSize < 0 || this.y + this.vy * this.blockSize >= gameboard.height || this.blockBehind != undefined ? isSelfcolliding(this) : false) {
                 game.end(false);
                 return;
             }
@@ -246,13 +246,16 @@ function round(toRound, roundTo) {
     }
 }
 
-function isSelfcolliding(currentBlock, foremostBlock) {
-    while (currentBlock) {
-        if (currentBlock.x === foremostBlock.x + foremostBlock.vx * foremostBlock.blockSize && currentBlock.y === foremostBlock.y + foremostBlock.vy * foremostBlock.blockSize) {
+// SHOULD PROBABLY RENAME currentBlock TO MORE APPROPRIATE NAME
+function isSelfcolliding(currentBlock) {
+    while (currentBlock.blockBehind != undefined) {
+        if (snake.firstBlock.x + snake.firstBlock.vx * snake.firstBlock.blockSize === currentBlock.x && snake.firstBlock.y + snake.firstBlock.vy * snake.firstBlock.blockSize === currentBlock.y) {
             return true;
         }
+
         currentBlock = currentBlock.blockBehind;
     }
+    return false;
 }
 
 function runSnake() {
