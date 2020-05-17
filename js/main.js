@@ -27,9 +27,13 @@ class Snake {
 }
 
 class Game {
-    constructor(size, interval) {
-        this.blockSize = size;
-        this.updateInterval = interval;
+    constructor(settings) {
+        for (const setting in settings) {
+            this[setting] = settings[setting];
+        }
+
+        this.blockSize = settings.blockSize;
+        this.updateInterval = settings.updateInterval;
         this.score = 0;
         this.running;
     }
@@ -190,7 +194,7 @@ class SnakeBlock {
     }
 }
 
-const game = new Game(parseInt(window.prompt("HOW THICC 🍑 SHOULD SHNAKE BE? WE RECMND 50", 50)), parseInt(window.prompt("HOW QUICK U WANT GAME? WE RECMND 150", 150)));
+const game = new Game(parseSettings());
 
 const gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
 
@@ -237,6 +241,19 @@ window.addEventListener(
     },
     false
 );
+
+function parseSettings() {
+    let settings = {};
+
+    let url = new URL(window.location.href);
+    let entries = url.searchParams.entries();
+
+    for (const entry of entries) {
+        settings[entry[0]] = !isNaN(parseInt(entry[1])) ? parseInt(entry[1]) : entry[1];
+    }
+
+    return settings;
+}
 
 function round(toRound, roundTo) {
     if (toRound > 0) {
