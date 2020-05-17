@@ -34,14 +34,35 @@ class Game {
 
         this.blockSize = settings.blockSize;
         this.updateInterval = settings.updateInterval;
-        this.score = 0;
+        this.score = 1;
         this.running;
     }
 
-    start() {
+    init() {
         this.running = true;
+
+        gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
+        snake = new Snake();
+        apple = new Apple();
+
         window.requestAnimationFrame(runSnake);
         apple.place();
+    }
+
+    restart() {
+        this.score = 1;
+        let toDelete = document.querySelectorAll(".delete-on-restart");
+        let toHide = document.querySelectorAll(".hide-on-restart");
+
+        toDelete.forEach((element) => {
+            element.remove();
+        });
+
+        toHide.forEach((element) => {
+            element.style.display = "none";
+        });
+
+        this.init();
     }
 
     end(won) {
@@ -99,7 +120,7 @@ class Apple {
             game.end(true);
         } else {
             this.element = document.createElement("div");
-            this.element.classList.add("apple", "block");
+            this.element.classList.add("apple", "block", "delete-on-restart");
 
             const spotIndex = Math.round(Math.random() * (gameboard.availableSpots.length - 1));
 
@@ -137,7 +158,7 @@ class SnakeBlock {
         this.blockBehind;
 
         this.element = document.createElement("div");
-        this.element.classList.add("snake-block", "block");
+        this.element.classList.add("snake-block", "block", "delete-on-restart");
 
         this.element.style.width = this.blockSize + "px";
         this.element.style.height = this.blockSize + "px";
@@ -196,11 +217,11 @@ class SnakeBlock {
 
 const game = new Game(parseSettings());
 
-const gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
+let gameboard;
 
-const snake = new Snake();
+let snake;
 
-const apple = new Apple();
+let apple;
 
 let lastTime = new Date().getTime();
 let deltaUpdate = 0;
@@ -208,10 +229,13 @@ let deltaUpdate = 0;
 window.addEventListener(
     "load",
     () => {
-        game.start();
+        game.init();
 
         document.addEventListener("keydown", (e) => {
             switch (e.key) {
+                case "r":
+                    game.restart();
+                    break;
                 case "a":
                 case "ArrowLeft":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x < snake.firstBlock.x) break;
