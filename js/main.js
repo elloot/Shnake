@@ -213,6 +213,12 @@ class SnakeBlock {
     }
 }
 
+const validSettings = {
+    blockSize: { min: 10, max: 100, default: 50 },
+    updateInterval: { min: 10, max: 5000, default: 150 },
+    color: { values: [], default: "white" },
+};
+
 const game = new Game(parseSettings());
 
 let gameboard;
@@ -294,14 +300,51 @@ window.addEventListener(
 function parseSettings() {
     let settings = {};
 
+    for (const setting in validSettings) {
+        settings[setting] = validSettings[setting].default;
+    }
+
     let url = new URL(window.location.href);
     let entries = url.searchParams.entries();
 
     for (const entry of entries) {
-        settings[entry[0]] = !isNaN(parseInt(entry[1])) ? parseInt(entry[1]) : entry[1];
+        const key = entry[0];
+        const value = !isNaN(parseInt(entry[1])) ? parseInt(entry[1]) : entry[1];
+
+        const result = validateSetting(key, value);
+
+        switch (result) {
+            case "ok":
+                settings[key] = value;
+                break;
+            case "badSetting":
+                console.error(`${key} is not a valid setting`);
+                break;
+            case "badValue":
+                console.error(`${value} is not a valid value for ${key} - using default value of ${validSettings[key].default}`);
+                break;
+        }
     }
 
     return settings;
+}
+
+function validateSetting(key, value) {
+    if (Object.keys(validSettings).includes(key)) {
+        if (typeof validSettings[key].default == "number") {
+            if (!(value >= validSettings[key].min && value <= validSettings[key].max)) {
+                return "badValue";
+            }
+        } else {
+            if (!validSettings[key].includes(value)) {
+                return "badValue";
+            }
+        }
+    } else {
+        return "badSetting";
+    }
+
+    return "ok";
 }
 
 function round(toRound, roundTo) {
