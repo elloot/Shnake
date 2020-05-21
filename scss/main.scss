@@ -34,14 +34,14 @@ body {
 
 .block {
     position: absolute;
-    /*transform: translate(-50%, -50%);*/
     border-radius: 100%;
 }
 
 .snake-block {
     background: white;
     z-index: 10000;
-    transition: left 100ms, top 100ms;
+    transition: transform 100ms;
+    will-change: transform;
 }
 
 .apple {

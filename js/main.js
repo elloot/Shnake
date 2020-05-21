@@ -163,8 +163,7 @@ class SnakeBlock {
         this.element.style.width = this.blockSize + "px";
         this.element.style.height = this.blockSize + "px";
 
-        this.element.style.left = this.x + "px";
-        this.element.style.top = this.y + "px";
+        this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
 
         gameboard.element.appendChild(this.element);
     }
@@ -194,8 +193,7 @@ class SnakeBlock {
         }
 
         //set CSS positioning
-        this.element.style.left = this.x + "px";
-        this.element.style.top = this.y + "px";
+        this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
 
         //sends this blocks previous x- and y-coordinates (the ones it had before moving) to the block behind
         if (this.blockBehind) {
