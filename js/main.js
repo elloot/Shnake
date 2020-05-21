@@ -232,30 +232,30 @@ window.addEventListener(
         game.init();
 
         document.addEventListener("keydown", (e) => {
-            switch (e.key) {
+            switch (e.key.toLowerCase()) {
                 case "r":
                     game.restart();
                     break;
                 case "a":
-                case "ArrowLeft":
+                case "arrowleft":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x < snake.firstBlock.x) break;
 
                     snake.setXDirection(-1);
                     break;
                 case "d":
-                case "ArrowRight":
+                case "arrowright":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x > snake.firstBlock.x) break;
 
                     snake.setXDirection(1);
                     break;
                 case "w":
-                case "ArrowUp":
+                case "arrowup":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y < snake.firstBlock.y) break;
 
                     snake.setYDirection(-1);
                     break;
                 case "s":
-                case "ArrowDown":
+                case "arrowdown":
                     if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y > snake.firstBlock.y) break;
 
                     snake.setYDirection(1);
