@@ -126,9 +126,9 @@ class Game {
 
     end(won) {
         if (won) {
-            document.querySelector(".UWON").style.display = "block";
+            document.querySelector(".modal--win").style.display = "block";
         } else {
-            document.querySelector(".ULOST").style.display = "block";
+            document.querySelector(".modal--lose").style.display = "block";
         }
         this.running = false;
     }

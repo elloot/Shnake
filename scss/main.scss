@@ -59,7 +59,7 @@ body {
     margin: auto;
 }
 
-.ULOST {
+.modal--lose {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -71,7 +71,7 @@ body {
     z-index: 20000;
 }
 
-.UWON {
+.modal--win {
     position: absolute;
     left: 50%;
     top: 50%;
