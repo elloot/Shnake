@@ -39,7 +39,7 @@ body {
 
 .snake-block {
     background: white;
-    z-index: 10000;
+    z-index: 1;
     transition: transform 100ms;
     will-change: transform;
 }
@@ -59,28 +59,19 @@ body {
     margin: auto;
 }
 
-.modal--lose {
+.modal {
     position: absolute;
     left: 50%;
     top: 50%;
+    width: 500px;
+    height: 700px;
+    z-index: 10;
     transform: translate(-50%, -50%);
-    font-size: 200px;
-    color: red;
-    border: 20px yellow dotted;
+    background: white;
+    color: $clr-green;
+    font-size: 32px;
     display: none;
-    z-index: 20000;
-}
-
-.modal--win {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 200px;
-    color: red;
-    border: 20px yellow dotted;
-    display: none;
-    z-index: 20000;
+    padding: 20px;
 }
 
 @keyframes apple-appear {
