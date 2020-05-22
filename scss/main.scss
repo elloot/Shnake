@@ -70,8 +70,18 @@ body {
     background: white;
     color: $clr-green;
     font-size: 32px;
-    display: none;
     padding: 20px;
+    &--win,
+    &--lose {
+        display: none;
+    }
+    .input-wrapper {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    input {
+        width: 100%;
+    }
 }
 
 @keyframes apple-appear {

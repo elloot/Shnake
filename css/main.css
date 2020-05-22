@@ -81,8 +81,25 @@ body {
   background: white;
   color: #2cb65b;
   font-size: 32px;
-  display: none;
   padding: 20px;
+}
+
+.modal--win, .modal--lose {
+  display: none;
+}
+
+.modal .input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.modal input {
+  width: 100%;
 }
 
 @-webkit-keyframes apple-appear {

@@ -275,7 +275,7 @@ class SnakeBlock {
 const validSettings = {
     blockSize: { min: 10, max: 100, default: 50 },
     updateInterval: { min: 10, max: 5000, default: 150 },
-    color: { values: [], default: "white" },
+    color: { values: ["red", "white"], default: "white" },
 };
 
 const game = new Game(parseSettings());
