@@ -2,6 +2,7 @@ window.addEventListener("load", createUI(), false);
 
 function createUI() {
     const modal = document.querySelector(".modal--settings");
+    const form = document.querySelector(".form");
 
     for (const setting in validSettings) {
         const defaultValue = validSettings[setting].default;
@@ -56,30 +57,32 @@ function createUI() {
         inputElement.id = setting;
         inputElement.classList.add("input");
 
-        modal.appendChild(labelElement);
+        form.appendChild(labelElement);
         inputWrapper.appendChild(inputElement);
-        modal.appendChild(inputWrapper);
+        form.appendChild(inputWrapper);
     }
 
-    const inputElements = document.querySelectorAll(".input");
     const rangeElements = document.querySelectorAll("input[type=range]");
     const rangeDisplayElements = document.querySelectorAll(".range-display");
+    const startGameButton = document.querySelector("#startGameButton");
 
     rangeElements.forEach((element) => {
         element.addEventListener("input", (e) => {
             element.parentElement.querySelector(".range-display").value = element.value;
+            game[element.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
         });
     });
 
     rangeDisplayElements.forEach((element) => {
         element.addEventListener("input", (e) => {
-            element.parentElement.querySelector(".input").value = element.value;
+            const relatedRangeElement = element.parentElement.querySelector(".input");
+            relatedRangeElement.value = element.value;
+            game[relatedRangeElement.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
         });
     });
 
-    inputElements.forEach((element) => {
-        element.addEventListener("input", (e) => {
-            game[element.id] = element.value;
-        });
+    startGameButton.addEventListener("click", (e) => {
+        modal.style.display = "none";
+        game.init();
     });
 }

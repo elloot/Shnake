@@ -289,14 +289,6 @@ let apple;
 let lastTime = new Date().getTime();
 let deltaUpdate = 0;
 
-window.addEventListener(
-    "load",
-    () => {
-        game.init();
-    },
-    false
-);
-
 function parseSettings() {
     let settings = {};
 
