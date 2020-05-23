@@ -27,30 +27,29 @@ function createUI() {
                 optionElement.textContent = value;
                 inputElement.appendChild(optionElement);
             }
-            inputElement.value = game[setting];
+            inputElement.value = shnake.game[setting];
         } else {
             inputElement = document.createElement("input");
             if (type == "string") {
                 inputElement.type = "text";
-                inputElement.value = game[setting];
+                inputElement.value = shnake.game[setting];
             } else if (type == "number") {
                 inputElement.type = "range";
-                //inputElement.value = game[setting];
                 inputElement.min = validSettings[setting].min;
                 inputElement.max = validSettings[setting].max;
 
                 const displayElement = document.createElement("input");
                 displayElement.type = "number";
-                displayElement.value = game[setting];
+                displayElement.value = shnake.game[setting];
                 displayElement.min = validSettings[setting].min;
                 displayElement.max = validSettings[setting].max;
                 displayElement.classList.add("range-display");
                 inputWrapper.appendChild(displayElement);
 
-                inputElement.value = game[setting];
+                inputElement.value = shnake.game[setting];
             } else if (type == "boolean") {
                 inputElement.type = "checkbox";
-                inputElement.checked = game[setting];
+                inputElement.checked = shnake.game[setting];
             }
         }
 
@@ -69,7 +68,7 @@ function createUI() {
     rangeElements.forEach((element) => {
         element.addEventListener("input", (e) => {
             element.parentElement.querySelector(".range-display").value = element.value;
-            game[element.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
+            shnake.game[element.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
         });
     });
 
@@ -77,12 +76,12 @@ function createUI() {
         element.addEventListener("input", (e) => {
             const relatedRangeElement = element.parentElement.querySelector(".input");
             relatedRangeElement.value = element.value;
-            game[relatedRangeElement.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
+            shnake.game[relatedRangeElement.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
         });
     });
 
     startGameButton.addEventListener("click", (e) => {
         modal.style.display = "none";
-        game.init();
+        shnake.game.init();
     });
 }
