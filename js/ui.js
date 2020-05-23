@@ -1,4 +1,17 @@
-window.addEventListener("load", createUI(), false);
+window.addEventListener(
+    "load",
+    (e) => {
+        createUI();
+
+        const restartButtons = document.querySelectorAll(".button--restart");
+        restartButtons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+                shnake.game.restart();
+            });
+        });
+    },
+    false
+);
 
 function createUI() {
     const modal = document.querySelector(".modal--settings");
@@ -94,21 +107,13 @@ function hideModals() {
 }
 
 function showModal(modalType) {
-    let modal;
+    const modal = document.querySelector(`.modal--${modalType}`);
 
-    switch (modalType) {
-        case "win":
-            modal = document.querySelector(".modal--win");
-            break;
-        case "lose":
-            modal = document.querySelector(".modal--lose");
-            break;
-        case "settings":
-            modal = document.querySelector(".modal--settings");
-            break;
-
-        default:
-            break;
+    if (modalType == "win" || modalType == "lose") {
+        const scoreElements = document.querySelectorAll(".modal__score");
+        scoreElements.forEach((element) => {
+            element.innerHTML = shnake.game.score;
+        });
     }
 
     modal.style.display = "block";
