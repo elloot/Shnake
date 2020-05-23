@@ -1,20 +1,20 @@
 class Snake {
     constructor() {
-        this.firstBlock = new SnakeBlock(game.blockSize, game.blockSize, game.blockSize);
+        this.firstBlock = new SnakeBlock(shnake.game.blockSize, shnake.game.blockSize, shnake.game.blockSize);
         this.lastBlock = this.firstBlock;
 
-        gameboard.removeAvailableSpot(this.firstBlock.x, this.firstBlock.y);
+        shnake.gameboard.removeAvailableSpot(this.firstBlock.x, this.firstBlock.y);
     }
     addBlock(x, y) {
         this.lastBlockSave = this.lastBlock;
 
-        this.lastBlock = new SnakeBlock(x, y, game.blockSize);
+        this.lastBlock = new SnakeBlock(x, y, shnake.game.blockSize);
 
         this.lastBlockSave.blockBehind = this.lastBlock;
     }
     update() {
         this.firstBlock.move();
-        document.querySelector(".score").innerHTML = game.score;
+        document.querySelector(".score").innerHTML = shnake.game.score;
     }
     setXDirection(vx) {
         this.firstBlock.vx = vx;
@@ -41,12 +41,12 @@ class Game {
     init() {
         this.running = true;
 
-        gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
-        snake = new Snake();
-        apple = new Apple();
+        shnake.gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
+        shnake.snake = new Snake();
+        shnake.apple = new Apple();
 
         window.requestAnimationFrame(runSnake);
-        apple.place();
+        shnake.apple.place();
 
         document.addEventListener("keydown", (e) => {
             switch (e.key.toLowerCase()) {
@@ -121,6 +121,8 @@ class Game {
             element.style.display = "none";
         });
 
+        delete shnake.gameboard, shnake.apple, shnake.snake;
+
         this.init();
     }
 
@@ -136,8 +138,8 @@ class Game {
 
 class Gameboard {
     constructor(clientHeight, clientWidth) {
-        this.width = round(clientWidth, game.blockSize);
-        this.height = round(clientHeight, game.blockSize);
+        this.width = round(clientWidth, shnake.game.blockSize);
+        this.height = round(clientHeight, shnake.game.blockSize);
 
         this.element = document.querySelector(".gameboard");
 
@@ -149,8 +151,8 @@ class Gameboard {
 
         this.availableSpots = [];
 
-        for (let y = 0; y < this.height; y += game.blockSize) {
-            for (let x = 0; x < this.width; x += game.blockSize) {
+        for (let y = 0; y < this.height; y += shnake.game.blockSize) {
+            for (let x = 0; x < this.width; x += shnake.game.blockSize) {
                 this.addAvailableSpot(x, y);
             }
         }
@@ -171,34 +173,34 @@ class Gameboard {
 
 class Apple {
     constructor() {
-        this.blockSize = game.blockSize;
+        this.blockSize = shnake.game.blockSize;
     }
 
     place() {
-        if (!gameboard.availableSpots.length) {
-            game.end(true);
+        if (!shnake.gameboard.availableSpots.length) {
+            shnake.game.end(true);
         } else {
             this.element = document.createElement("div");
             this.element.classList.add("apple", "block", "delete-on-restart");
 
-            const spotIndex = Math.round(Math.random() * (gameboard.availableSpots.length - 1));
+            const spotIndex = Math.round(Math.random() * (shnake.gameboard.availableSpots.length - 1));
 
-            this.x = gameboard.availableSpots[spotIndex].x;
-            this.y = gameboard.availableSpots[spotIndex].y;
+            this.x = shnake.gameboard.availableSpots[spotIndex].x;
+            this.y = shnake.gameboard.availableSpots[spotIndex].y;
 
             this.element.style.width = this.blockSize + "px";
             this.element.style.height = this.blockSize + "px";
 
             this.element.addEventListener("animationend", (e) => {
                 if (e.animationName === "apple-disappear") {
-                    gameboard.element.removeChild(e.target);
+                    shnake.gameboard.element.removeChild(e.target);
                 }
             });
 
             this.element.style.left = this.x + "px";
             this.element.style.top = this.y + "px";
 
-            gameboard.element.appendChild(this.element);
+            shnake.gameboard.element.appendChild(this.element);
         }
     }
 }
@@ -224,7 +226,7 @@ class SnakeBlock {
 
         this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
 
-        gameboard.element.appendChild(this.element);
+        shnake.gameboard.element.appendChild(this.element);
     }
 
     move(frontX, frontY) {
@@ -237,7 +239,7 @@ class SnakeBlock {
         } else {
             //game over detector
             if (isWallColliding(this) || (this.blockBehind != undefined ? isSelfcolliding(this) : false)) {
-                game.end(false);
+                shnake.game.end(false);
                 return;
             }
 
@@ -245,10 +247,10 @@ class SnakeBlock {
             this.y += this.vy * this.blockSize;
 
             //only removes an available spot if snake has moved
-            if (this.x != this.previousX || this.y != this.previousY) gameboard.removeAvailableSpot(this.x, this.y);
+            if (this.x != this.previousX || this.y != this.previousY) shnake.gameboard.removeAvailableSpot(this.x, this.y);
 
             //apple chonk detector
-            if (this.x === apple.x && this.y === apple.y) applePlace = true;
+            if (this.x === shnake.apple.x && this.y === shnake.apple.y) applePlace = true;
         }
 
         //set CSS positioning
@@ -260,12 +262,12 @@ class SnakeBlock {
         } else if (this.x != this.previousX || this.y != this.previousY) {
             //only adds an available spot if this block is not the head and if this block has moved
             if (applePlace) {
-                game.score++;
-                snake.addBlock(this.previousX, this.previousY);
+                shnake.game.score++;
+                shnake.snake.addBlock(this.previousX, this.previousY);
 
-                apple.element.classList.add("apple-disappear");
-                apple.place();
-            } else gameboard.addAvailableSpot(this.previousX, this.previousY);
+                shnake.apple.element.classList.add("apple-disappear");
+                shnake.apple.place();
+            } else shnake.gameboard.addAvailableSpot(this.previousX, this.previousY);
 
             applePlace = false;
         }
@@ -278,24 +280,14 @@ const validSettings = {
     color: { values: [], default: "white" },
 };
 
-const game = new Game(parseSettings());
-
-let gameboard;
-
-let snake;
-
-let apple;
+// namespace for all game-objects
+let shnake = {};
+shnake.game = new Game(parseSettings());
 
 let lastTime = new Date().getTime();
 let deltaUpdate = 0;
 
-window.addEventListener(
-    "load",
-    () => {
-        game.init();
-    },
-    false
-);
+window.addEventListener("load", shnake.game.init(), false);
 
 function parseSettings() {
     let settings = {};
@@ -358,7 +350,7 @@ function round(toRound, roundTo) {
 // SHOULD PROBABLY RENAME currentBlock TO MORE APPROPRIATE NAME
 function isSelfcolliding(currentBlock) {
     while (currentBlock.blockBehind != undefined) {
-        if (snake.firstBlock.x + snake.firstBlock.vx * snake.firstBlock.blockSize === currentBlock.x && snake.firstBlock.y + snake.firstBlock.vy * snake.firstBlock.blockSize === currentBlock.y) {
+        if (shnake.snake.firstBlock.x + shnake.snake.firstBlock.vx * shnake.snake.firstBlock.blockSize === currentBlock.x && shnake.snake.firstBlock.y + shnake.snake.firstBlock.vy * shnake.snake.firstBlock.blockSize === currentBlock.y) {
             return true;
         }
 
@@ -368,20 +360,20 @@ function isSelfcolliding(currentBlock) {
 }
 
 function isWallColliding(headBlock) {
-    return headBlock.x + headBlock.vx * headBlock.blockSize >= gameboard.width || headBlock.x + headBlock.vx * headBlock.blockSize < 0 || headBlock.y + headBlock.vy * headBlock.blockSize < 0 || headBlock.y + headBlock.vy * headBlock.blockSize >= gameboard.height;
+    return headBlock.x + headBlock.vx * headBlock.blockSize >= shnake.gameboard.width || headBlock.x + headBlock.vx * headBlock.blockSize < 0 || headBlock.y + headBlock.vy * headBlock.blockSize < 0 || headBlock.y + headBlock.vy * headBlock.blockSize >= shnake.gameboard.height;
 }
 
 function runSnake() {
     let currentTime = new Date().getTime();
-    deltaUpdate += (currentTime - lastTime) / game.updateInterval;
+    deltaUpdate += (currentTime - lastTime) / shnake.game.updateInterval;
     lastTime = currentTime;
 
     while (deltaUpdate >= 1) {
         deltaUpdate--;
-        snake.update();
+        shnake.snake.update();
     }
 
-    if (game.running) {
+    if (shnake.game.running) {
         window.requestAnimationFrame(runSnake);
     }
 }
