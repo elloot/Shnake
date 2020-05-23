@@ -116,29 +116,19 @@ class Game {
     }
 
     restart() {
-        this.score = 1;
         let toDelete = document.querySelectorAll(".delete-on-restart");
-        let toHide = document.querySelectorAll(".hide-on-restart");
-
         toDelete.forEach((element) => {
             element.remove();
         });
-
-        toHide.forEach((element) => {
-            element.style.display = "none";
-        });
+        hideModals();
 
         delete shnake.gameboard, shnake.apple, shnake.snake;
-
+        this.score = 1;
         this.init();
     }
 
     end(won) {
-        if (won) {
-            document.querySelector(".modal--win").style.display = "block";
-        } else {
-            document.querySelector(".modal--lose").style.display = "block";
-        }
+        showModal(won ? "win" : "lose");
         this.running = false;
     }
 }

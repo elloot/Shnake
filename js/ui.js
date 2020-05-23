@@ -85,3 +85,31 @@ function createUI() {
         shnake.game.init();
     });
 }
+
+function hideModals() {
+    const modals = document.querySelectorAll(".modal");
+    modals.forEach((element) => {
+        element.style.display = "none";
+    });
+}
+
+function showModal(modalType) {
+    let modal;
+
+    switch (modalType) {
+        case "win":
+            modal = document.querySelector(".modal--win");
+            break;
+        case "lose":
+            modal = document.querySelector(".modal--lose");
+            break;
+        case "settings":
+            modal = document.querySelector(".modal--settings");
+            break;
+
+        default:
+            break;
+    }
+
+    modal.style.display = "block";
+}
