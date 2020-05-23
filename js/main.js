@@ -36,6 +36,8 @@ class Game {
         this.updateInterval = settings.updateInterval;
         this.score = 1;
         this.running;
+
+        this.shouldInitListeners = true;
     }
 
     init() {
@@ -48,61 +50,66 @@ class Game {
         window.requestAnimationFrame(runSnake);
         shnake.apple.place();
 
+        if (this.shouldInitListeners) this.initListeners();
+        this.shouldInitListeners = false;
+    }
+
+    initListeners() {
         document.addEventListener("keydown", (e) => {
             switch (e.key.toLowerCase()) {
                 case "r":
-                    game.restart();
+                    shnake.game.restart();
                     break;
                 case "a":
                 case "arrowleft":
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x < snake.firstBlock.x) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.x < shnake.snake.firstBlock.x) break;
 
-                    snake.setXDirection(-1);
+                    shnake.snake.setXDirection(-1);
                     break;
                 case "d":
                 case "arrowright":
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x > snake.firstBlock.x) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.x > shnake.snake.firstBlock.x) break;
 
-                    snake.setXDirection(1);
+                    shnake.snake.setXDirection(1);
                     break;
                 case "w":
                 case "arrowup":
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y < snake.firstBlock.y) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.y < shnake.snake.firstBlock.y) break;
 
-                    snake.setYDirection(-1);
+                    shnake.snake.setYDirection(-1);
                     break;
                 case "s":
                 case "arrowdown":
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y > snake.firstBlock.y) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.y > shnake.snake.firstBlock.y) break;
 
-                    snake.setYDirection(1);
+                    shnake.snake.setYDirection(1);
                     break;
             }
         });
 
-        let hammer = new Hammer(gameboard.element);
+        let hammer = new Hammer(shnake.gameboard.element);
         hammer.get("pan").set({ direction: Hammer.DIRECTION_ALL, threshold: 25 });
         hammer.on("pan", (e) => {
             switch (e.direction) {
                 case 2:
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x < snake.firstBlock.x) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.x < shnake.snake.firstBlock.x) break;
 
-                    snake.setXDirection(-1);
+                    shnake.snake.setXDirection(-1);
                     break;
                 case 4:
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.x > snake.firstBlock.x) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.x > shnake.snake.firstBlock.x) break;
 
-                    snake.setXDirection(1);
+                    shnake.snake.setXDirection(1);
                     break;
                 case 8:
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y < snake.firstBlock.y) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.y < shnake.snake.firstBlock.y) break;
 
-                    snake.setYDirection(-1);
+                    shnake.snake.setYDirection(-1);
                     break;
                 case 16:
-                    if (snake.firstBlock.blockBehind && snake.firstBlock.blockBehind.y > snake.firstBlock.y) break;
+                    if (shnake.snake.firstBlock.blockBehind && shnake.snake.firstBlock.blockBehind.y > shnake.snake.firstBlock.y) break;
 
-                    snake.setYDirection(1);
+                    shnake.snake.setYDirection(1);
                     break;
             }
         });
