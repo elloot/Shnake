@@ -273,8 +273,7 @@ class SnakeBlock {
 
 const validSettings = {
     blockSize: { min: 10, max: 100, default: 50 },
-    updateInterval: { min: 10, max: 5000, default: 150 },
-    color: { values: ["red", "white"], default: "white" },
+    updateInterval: { min: 50, max: 1000, default: 150 },
 };
 
 // namespace for all game-objects
