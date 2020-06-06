@@ -14,17 +14,20 @@
         <div class="modal modal--settings">
             <h1>Shnake 🐍</h1>
             <div class="form"></div>
-            <a href="#" id="startGameButton" class="button">Start game</a>
+            <div class="modal__buttons">
+                <a href="#" id="startGameButton" class="button button--prim">Start game</a>
+                <a href="#" class="button button--scnd">X</a>
+            </div>
         </div>
         <div class="modal modal--lose">
             <h1>Game over</h1>
             <p class="modal__score"></p>
-            <a href="#" class="button button--restart">Restart</a>
+            <a href="#" class="button button--prim button--restart">Restart</a>
         </div>
         <div class="modal modal--win">
             <h1>You won!</h1>
             <p class="modal__score"></p>
-            <a href="#" class="button button--restart">Restart</a>
+            <a href="#" class="button button--prim button--restart">Restart</a>
         </div>
         <div class="gameboard">
             <h1 class="score">0</h1>

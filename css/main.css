@@ -131,6 +131,52 @@ h1 {
   font-size: 18px;
 }
 
+.modal__buttons {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+a {
+  color: inherit;
+}
+
+.button {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.button--prim {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  color: var(--clr-btn-prim-fg);
+  background: var(--clr-btn-prim-bg);
+  margin-right: 16px;
+}
+
+.button--scnd {
+  color: var(--clr-btn-scnd-fg);
+  background: var(--clr-btn-scnd-bg);
+}
+
 @-webkit-keyframes apple-appear {
   from {
     -webkit-transform: scale(0);

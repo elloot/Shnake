@@ -108,6 +108,40 @@ h1 {
         font-weight: normal;
         font-size: 18px;
     }
+    &__buttons {
+        position: absolute;
+        bottom: 32px;
+        left: 32px;
+        right: 32px;
+        display: flex;
+    }
+}
+
+a {
+    color: inherit;
+}
+
+.button {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 16px;
+
+    &--prim {
+        flex-grow: 1;
+        color: var(--clr-btn-prim-fg);
+        background: var(--clr-btn-prim-bg);
+        margin-right: 16px;
+    }
+    &--scnd {
+        color: var(--clr-btn-scnd-fg);
+        background: var(--clr-btn-scnd-bg);
+    }
 }
 
 @keyframes apple-appear {
