@@ -122,7 +122,7 @@ h1 {
           flex-direction: row-reverse;
 }
 
-.modal input {
+.modal range-slider {
   width: 100%;
 }
 

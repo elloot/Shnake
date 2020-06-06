@@ -42,12 +42,12 @@ function createUI() {
             }
             inputElement.value = shnake.game[setting];
         } else {
-            inputElement = document.createElement("input");
             if (type == "string") {
+                inputElement = document.createElement("input");
                 inputElement.type = "text";
                 inputElement.value = shnake.game[setting];
             } else if (type == "number") {
-                inputElement.type = "range";
+                inputElement = document.createElement("range-slider");
                 inputElement.min = validSettings[setting].min;
                 inputElement.max = validSettings[setting].max;
 
@@ -61,6 +61,7 @@ function createUI() {
 
                 inputElement.value = shnake.game[setting];
             } else if (type == "boolean") {
+                inputElement = document.createElement("input");
                 inputElement.type = "checkbox";
                 inputElement.checked = shnake.game[setting];
             }
@@ -74,7 +75,7 @@ function createUI() {
         form.appendChild(inputWrapper);
     }
 
-    const rangeElements = document.querySelectorAll("input[type=range]");
+    const rangeElements = document.querySelectorAll("range-slider");
     const rangeDisplayElements = document.querySelectorAll(".range-display");
     const startGameButton = document.querySelector("#startGameButton");
 
