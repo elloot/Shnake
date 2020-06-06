@@ -127,8 +127,27 @@ h1 {
 }
 
 .modal range-slider {
+  --track-height: 4px;
   width: 100%;
   margin: 0 16px 0 0;
+}
+
+.modal range-slider:focus .thumb {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.modal range-slider:focus::before {
+  border: 1px solid var(--clr-text-accent);
+}
+
+.modal range-slider::before {
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--clr-text-accent)), to(var(--clr-text-accent))) 0/var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
+  background: linear-gradient(var(--clr-text-accent), var(--clr-text-accent)) 0/var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
+}
+
+.modal range-slider .thumb {
+  background: var(--clr-text-accent);
 }
 
 .modal label {

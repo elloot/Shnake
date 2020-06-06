@@ -104,8 +104,23 @@ h1 {
         margin-bottom: 8px;
     }
     range-slider {
+        --track-height: 4px;
         width: 100%;
         margin: 0 16px 0 0;
+        &:focus {
+            .thumb {
+                box-shadow: none;
+            }
+            &::before {
+                border: 1px solid var(--clr-text-accent);
+            }
+        }
+        &::before {
+            background: linear-gradient(var(--clr-text-accent), var(--clr-text-accent)) 0 / var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
+        }
+        .thumb {
+            background: var(--clr-text-accent);
+        }
     }
     label {
         font-weight: normal;
