@@ -100,9 +100,12 @@ h1 {
     .input-wrapper {
         display: flex;
         flex-direction: row-reverse;
+        align-items: center;
+        margin-bottom: 8px;
     }
     range-slider {
         width: 100%;
+        margin: 0 16px 0 0;
     }
     label {
         font-weight: normal;
@@ -119,6 +122,24 @@ h1 {
 
 a {
     color: inherit;
+}
+
+input {
+    background: var(--clr-btn-scnd-bg);
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1;
+    &[type="number"] {
+        width: 80px;
+        text-align: center;
+    }
+    &[type="text"] {
+        width: 100%;
+    }
 }
 
 .button {
