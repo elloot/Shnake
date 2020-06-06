@@ -40,6 +40,14 @@ body {
           align-items: center;
 }
 
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--clr-text-accent);
+  margin-bottom: 32px;
+}
+
 .score {
   position: absolute;
   left: 50%;
@@ -95,8 +103,9 @@ body {
           transform: translate(-50%, -50%);
   background: white;
   color: var(--clr-text-body);
+  border-radius: 20px;
   font-size: 32px;
-  padding: 20px;
+  padding: 32px;
 }
 
 .modal--win, .modal--lose {
@@ -115,6 +124,11 @@ body {
 
 .modal input {
   width: 100%;
+}
+
+.modal label {
+  font-weight: normal;
+  font-size: 18px;
 }
 
 @-webkit-keyframes apple-appear {
