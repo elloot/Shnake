@@ -146,7 +146,8 @@ a {
     color: inherit;
 }
 
-input {
+input,
+select {
     background: var(--clr-btn-scnd-bg);
     border: none;
     padding: 6px;

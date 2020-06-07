@@ -185,7 +185,8 @@ a {
   color: inherit;
 }
 
-input {
+input,
+select {
   background: var(--clr-btn-scnd-bg);
   border: none;
   padding: 6px;
@@ -196,12 +197,14 @@ input {
   line-height: 1;
 }
 
-input[type="number"] {
+input[type="number"],
+select[type="number"] {
   width: 80px;
   text-align: center;
 }
 
-input[type="text"] {
+input[type="text"],
+select[type="text"] {
   width: 100%;
 }
 
