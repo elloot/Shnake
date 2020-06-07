@@ -122,7 +122,7 @@ h1 {
                 box-shadow: none;
             }
             &::before {
-                border: 1px solid var(--clr-text-accent);
+                box-shadow: 0px 0px 0px 1px var(--clr-text-accent);
             }
         }
         &::before {
@@ -167,6 +167,10 @@ select {
     &[type="text"] {
         width: 100%;
     }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--clr-text-accent);
+    }
 }
 
 .switch {
@@ -182,7 +186,7 @@ select {
         cursor: pointer;
         z-index: 1;
         &:focus ~ .switch__shape {
-            border: 1px solid var(--clr-text-accent);
+            box-shadow: 0 0 0 2px var(--clr-text-accent);
         }
     }
     &__shape {
@@ -232,11 +236,19 @@ select {
         margin-right: 8px;
     }
 
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
+    }
+
     &--prim {
         flex-grow: 1;
         color: var(--clr-btn-prim-fg);
         background: var(--clr-btn-prim-bg);
         margin-right: 16px;
+        &:focus {
+            box-shadow: 0 0 6px 2px var(--clr-btn-prim-bg);
+        }
     }
     &--scnd {
         color: var(--clr-btn-scnd-fg);

@@ -156,7 +156,8 @@ h1 {
 }
 
 .modal range-slider:focus::before {
-  border: 1px solid var(--clr-text-accent);
+  -webkit-box-shadow: 0px 0px 0px 1px var(--clr-text-accent);
+          box-shadow: 0px 0px 0px 1px var(--clr-text-accent);
 }
 
 .modal range-slider::before {
@@ -213,6 +214,13 @@ select[type="text"] {
   width: 100%;
 }
 
+input:focus,
+select:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 0 2px var(--clr-text-accent);
+          box-shadow: 0 0 0 2px var(--clr-text-accent);
+}
+
 .switch {
   position: relative;
   width: 48px;
@@ -230,7 +238,8 @@ select[type="text"] {
 }
 
 .switch input:focus ~ .switch__shape {
-  border: 1px solid var(--clr-text-accent);
+  -webkit-box-shadow: 0 0 0 2px var(--clr-text-accent);
+          box-shadow: 0 0 0 2px var(--clr-text-accent);
 }
 
 .switch__shape {
@@ -290,6 +299,12 @@ select[type="text"] {
   margin-right: 8px;
 }
 
+.button:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
+          box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
+}
+
 .button--prim {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -297,6 +312,11 @@ select[type="text"] {
   color: var(--clr-btn-prim-fg);
   background: var(--clr-btn-prim-bg);
   margin-right: 16px;
+}
+
+.button--prim:focus {
+  -webkit-box-shadow: 0 0 6px 2px var(--clr-btn-prim-bg);
+          box-shadow: 0 0 6px 2px var(--clr-btn-prim-bg);
 }
 
 .button--scnd {
