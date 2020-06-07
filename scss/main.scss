@@ -97,9 +97,15 @@ h1 {
     &--lose {
         display: none;
     }
+    .setting-wrapper {
+        display: flex;
+        flex-direction: column;
+        &--horizontal {
+            flex-direction: row;
+        }
+    }
     .input-wrapper {
         display: flex;
-        flex-direction: row-reverse;
         align-items: center;
         margin-bottom: 8px;
     }
@@ -123,6 +129,7 @@ h1 {
         }
     }
     label {
+        flex-grow: 1;
         font-weight: normal;
         font-size: 18px;
     }

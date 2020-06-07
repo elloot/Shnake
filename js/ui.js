@@ -22,6 +22,9 @@ function createUI() {
         const allowedValues = validSettings[setting].values;
         const type = typeof defaultValue;
 
+        const settingWrapper = document.createElement("div");
+        settingWrapper.classList.add("setting-wrapper");
+
         const inputWrapper = document.createElement("div");
         inputWrapper.classList.add("input-wrapper");
 
@@ -30,6 +33,7 @@ function createUI() {
         labelElement.htmlFor = setting;
 
         let inputElement;
+
         if (type == "string" && allowedValues) {
             inputElement = document.createElement("select");
             for (const index in allowedValues) {
@@ -40,39 +44,45 @@ function createUI() {
                 optionElement.textContent = value;
                 inputElement.appendChild(optionElement);
             }
-            inputElement.value = shnake.game[setting];
+        } else if (type == "number") {
+            inputElement = document.createElement("range-slider");
+            inputElement.min = validSettings[setting].min;
+            inputElement.max = validSettings[setting].max;
+
+            const displayElement = document.createElement("input");
+            displayElement.type = "number";
+            displayElement.value = shnake.game[setting];
+            displayElement.min = validSettings[setting].min;
+            displayElement.max = validSettings[setting].max;
+            displayElement.classList.add("range-display");
+
+            inputWrapper.appendChild(inputElement);
+            inputWrapper.appendChild(displayElement);
         } else {
+            inputElement = document.createElement("input");
             if (type == "string") {
-                inputElement = document.createElement("input");
                 inputElement.type = "text";
-                inputElement.value = shnake.game[setting];
-            } else if (type == "number") {
-                inputElement = document.createElement("range-slider");
-                inputElement.min = validSettings[setting].min;
-                inputElement.max = validSettings[setting].max;
-
-                const displayElement = document.createElement("input");
-                displayElement.type = "number";
-                displayElement.value = shnake.game[setting];
-                displayElement.min = validSettings[setting].min;
-                displayElement.max = validSettings[setting].max;
-                displayElement.classList.add("range-display");
-                inputWrapper.appendChild(displayElement);
-
-                inputElement.value = shnake.game[setting];
             } else if (type == "boolean") {
-                inputElement = document.createElement("input");
                 inputElement.type = "checkbox";
-                inputElement.checked = shnake.game[setting];
             }
         }
 
+        inputElement.value = shnake.game[setting];
+        inputElement.checked = shnake.game[setting];
         inputElement.id = setting;
         inputElement.classList.add("input");
 
-        form.appendChild(labelElement);
-        inputWrapper.appendChild(inputElement);
-        form.appendChild(inputWrapper);
+        settingWrapper.appendChild(labelElement);
+        if (type == "number") {
+            settingWrapper.appendChild(inputWrapper);
+        } else {
+            settingWrapper.appendChild(inputElement);
+            if (type == "boolean") {
+                settingWrapper.classList.add("setting-wrapper--horizontal");
+            }
+        }
+
+        form.appendChild(settingWrapper);
     }
 
     const rangeElements = document.querySelectorAll("range-slider");
