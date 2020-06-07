@@ -120,6 +120,7 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .modal .setting-wrapper--horizontal {
@@ -129,6 +130,11 @@ h1 {
           flex-direction: row;
 }
 
+.modal .setting-wrapper input[type="text"],
+.modal .setting-wrapper select {
+  margin-top: 8px;
+}
+
 .modal .input-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -136,7 +142,6 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 8px;
 }
 
 .modal range-slider {

@@ -100,14 +100,18 @@ h1 {
     .setting-wrapper {
         display: flex;
         flex-direction: column;
+        margin-bottom: 16px;
         &--horizontal {
             flex-direction: row;
+        }
+        input[type="text"],
+        select {
+            margin-top: 8px;
         }
     }
     .input-wrapper {
         display: flex;
         align-items: center;
-        margin-bottom: 8px;
     }
     range-slider {
         --track-height: 4px;
