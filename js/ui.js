@@ -93,6 +93,16 @@ function createUI() {
         }
 
         form.appendChild(settingWrapper);
+
+        inputElement.addEventListener("change", (e) => {
+            let value;
+            if (inputElement.type == "checkbox") {
+                value = inputElement.checked;
+            } else {
+                value = inputElement.value;
+            }
+            shnake.game[inputElement.id] = !isNaN(parseInt(value)) ? parseInt(value) : value;
+        });
     }
 
     const rangeElements = document.querySelectorAll("range-slider");
@@ -102,7 +112,6 @@ function createUI() {
     rangeElements.forEach((element) => {
         element.addEventListener("input", (e) => {
             element.parentElement.querySelector(".range-display").value = element.value;
-            shnake.game[element.id] = !isNaN(parseInt(element.value)) ? parseInt(element.value) : element.value;
         });
     });
 
