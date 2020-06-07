@@ -205,6 +205,60 @@ input[type="text"] {
   width: 100%;
 }
 
+.switch {
+  position: relative;
+  width: 48px;
+  height: 24px;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.switch input:focus ~ .switch__shape {
+  border: 1px solid var(--clr-text-accent);
+}
+
+.switch__shape {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-btn-scnd-bg);
+  border-radius: 1000px;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.switch__shape::before {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: var(--clr-text-accent);
+  border-radius: 1000px;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.switch input:checked ~ .switch__shape {
+  background: var(--clr-text-accent);
+}
+
+.switch input:checked ~ .switch__shape::before {
+  background: var(--clr-modal-bg);
+  -webkit-transform: translateX(24px);
+          transform: translateX(24px);
+}
+
 .button {
   font-weight: bold;
   font-size: 18px;

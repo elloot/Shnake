@@ -33,6 +33,7 @@ function createUI() {
         labelElement.htmlFor = setting;
 
         let inputElement;
+        let switchElement;
 
         if (type == "string" && allowedValues) {
             inputElement = document.createElement("select");
@@ -64,6 +65,15 @@ function createUI() {
                 inputElement.type = "text";
             } else if (type == "boolean") {
                 inputElement.type = "checkbox";
+
+                switchElement = document.createElement("div");
+                switchElement.classList.add("switch");
+
+                const switchShapeElement = document.createElement("div");
+                switchShapeElement.classList.add("switch__shape");
+
+                switchElement.appendChild(inputElement);
+                switchElement.appendChild(switchShapeElement);
             }
         }
 
@@ -75,11 +85,11 @@ function createUI() {
         settingWrapper.appendChild(labelElement);
         if (type == "number") {
             settingWrapper.appendChild(inputWrapper);
+        } else if (type == "boolean") {
+            settingWrapper.appendChild(switchElement);
+            settingWrapper.classList.add("setting-wrapper--horizontal");
         } else {
             settingWrapper.appendChild(inputElement);
-            if (type == "boolean") {
-                settingWrapper.classList.add("setting-wrapper--horizontal");
-            }
         }
 
         form.appendChild(settingWrapper);

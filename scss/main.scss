@@ -164,6 +164,53 @@ input {
     }
 }
 
+.switch {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    input {
+        position: absolute;
+        opacity: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 1;
+        &:focus ~ .switch__shape {
+            border: 1px solid var(--clr-text-accent);
+        }
+    }
+    &__shape {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--clr-btn-scnd-bg);
+        border-radius: 1000px;
+        transition: all 200ms;
+        &::before {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            content: "";
+            width: 16px;
+            height: 16px;
+            background: var(--clr-text-accent);
+            border-radius: 1000px;
+            transition: all 200ms;
+        }
+    }
+    input:checked {
+        & ~ .switch__shape {
+            background: var(--clr-text-accent);
+            &::before {
+                background: var(--clr-modal-bg);
+                transform: translateX(24px);
+            }
+        }
+    }
+}
+
 .button {
     font-weight: bold;
     font-size: 18px;
