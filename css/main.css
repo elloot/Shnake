@@ -1,12 +1,9 @@
+/* ========== GLOBAL ========== */
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-:root {
-  font-family: Josefin Sans;
 }
 
 body {
@@ -21,7 +18,7 @@ body {
   --clr-btn-scnd-bg: #e8e8e8;
   --clr-text-body: #000000;
   --clr-text-accent: #249472;
-  --clr-text-soft: #454545;
+  --clr-text-heading: #454545;
   --clr-text-watermark: rgba(0, 0, 0, 0.04);
   --clr-modal-bg: #ffffff;
   --bdr-modal: none;
@@ -38,14 +35,16 @@ body {
   height: 100vh;
   overflow: hidden;
   background: var(--clr-bounds-bg);
+  font-family: "Josefin Sans", sans-serif;
 }
 
+/* ========== TYPOGRAPHY ========== */
 h1 {
   font-size: 40px;
   font-weight: 600;
   line-height: 115%;
   margin-bottom: 32px;
-  color: var(--clr-text-soft);
+  color: var(--clr-text-heading);
 }
 
 em {
@@ -54,15 +53,14 @@ em {
   color: var(--clr-text-accent);
 }
 
-.score {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  opacity: 30%;
-  font-size: 500px;
-  color: white;
+a {
+  color: inherit;
+}
+
+/* ========== GAMEBOARD ========== */
+.gameboard {
+  background: var(--clr-main-bg);
+  position: relative;
 }
 
 .block {
@@ -71,7 +69,7 @@ em {
 }
 
 .snake-block {
-  background: white;
+  background: var(--clr-snake);
   z-index: 2;
   -webkit-transition: -webkit-transform 100ms;
   transition: -webkit-transform 100ms;
@@ -83,20 +81,26 @@ em {
 .apple {
   background: var(--clr-apple);
   z-index: 1;
-  -webkit-animation: apple-appear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
-          animation: apple-appear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
+  -webkit-animation: appleAppear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
+          animation: appleAppear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
 }
 
-.apple-disappear {
-  -webkit-animation: apple-disappear 100ms;
-          animation: apple-disappear 100ms;
+.apple--disappearing {
+  -webkit-animation: appleDisappear 100ms;
+          animation: appleDisappear 100ms;
 }
 
-.gameboard {
-  background: var(--clr-main-bg);
-  position: relative;
+.score {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 500px;
+  color: var(--clr-score);
 }
 
+/* ========== MODALS & FORM ELEMENTS ========== */
 .modal {
   position: absolute;
   left: 50%;
@@ -108,6 +112,7 @@ em {
           transform: translate(-50%, -50%);
   background: white;
   color: var(--clr-text-body);
+  border: var(--bdr-modal);
   border-radius: 20px;
   font-size: 32px;
   padding: 32px;
@@ -150,39 +155,6 @@ em {
           align-items: center;
 }
 
-.modal range-slider {
-  --track-height: 4px;
-  width: 100%;
-  margin: 0 16px 0 0;
-}
-
-.modal range-slider:focus .thumb {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.modal range-slider:focus::before {
-  -webkit-box-shadow: 0px 0px 0px 1px var(--clr-text-accent);
-          box-shadow: 0px 0px 0px 1px var(--clr-text-accent);
-}
-
-.modal range-slider::before {
-  background: -webkit-gradient(linear, left top, left bottom, from(var(--clr-text-accent)), to(var(--clr-text-accent))) 0/var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
-  background: linear-gradient(var(--clr-text-accent), var(--clr-text-accent)) 0/var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
-}
-
-.modal range-slider .thumb {
-  background: var(--clr-text-accent);
-}
-
-.modal label {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  font-weight: normal;
-  font-size: 18px;
-}
-
 .modal__buttons {
   position: absolute;
   bottom: 32px;
@@ -201,25 +173,11 @@ em {
   -webkit-transform: translate(-24px, -50%) rotate(-15deg);
           transform: translate(-24px, -50%) rotate(-15deg);
   z-index: -1;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 200px;
   line-height: 65%;
-  color: var(--clr-text-soft);
+  color: var(--clr-text-heading);
   opacity: 0.03;
-}
-
-.backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--clr-main-bg);
-  z-index: 10;
-}
-
-a {
-  color: inherit;
 }
 
 input,
@@ -229,7 +187,7 @@ select {
   padding: 6px;
   border-radius: 4px;
   font-family: inherit;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 18px;
   line-height: 1;
 }
@@ -248,8 +206,41 @@ select[type="text"] {
 input:focus,
 select:focus {
   outline: none;
-  -webkit-box-shadow: 0 0 0 2px var(--clr-text-accent);
-          box-shadow: 0 0 0 2px var(--clr-text-accent);
+  -webkit-box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
+          box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
+}
+
+range-slider {
+  --track-height: 4px;
+  width: 100%;
+  margin: 0 16px 0 0;
+}
+
+range-slider:focus .thumb {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+range-slider:focus::before {
+  -webkit-box-shadow: 0 0 0 1px var(--clr-btn-prim-bg);
+          box-shadow: 0 0 0 1px var(--clr-btn-prim-bg);
+}
+
+range-slider::before {
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--clr-btn-prim-bg)), to(var(--clr-btn-prim-bg))) 0/var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
+  background: linear-gradient(var(--clr-btn-prim-bg), var(--clr-btn-prim-bg)) 0/var(--value-percent, 0) 100% no-repeat var(--clr-btn-scnd-bg);
+}
+
+range-slider .thumb {
+  background: var(--clr-btn-prim-bg);
+}
+
+label {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .switch {
@@ -269,8 +260,8 @@ select:focus {
 }
 
 .switch input:focus ~ .switch__shape {
-  -webkit-box-shadow: 0 0 0 2px var(--clr-text-accent);
-          box-shadow: 0 0 0 2px var(--clr-text-accent);
+  -webkit-box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
+          box-shadow: 0 0 0 2px var(--clr-btn-prim-bg);
 }
 
 .switch__shape {
@@ -291,14 +282,14 @@ select:focus {
   content: "";
   width: 16px;
   height: 16px;
-  background: var(--clr-text-accent);
+  background: var(--clr-btn-prim-bg);
   border-radius: 1000px;
   -webkit-transition: all 200ms;
   transition: all 200ms;
 }
 
 .switch input:checked ~ .switch__shape {
-  background: var(--clr-text-accent);
+  background: var(--clr-btn-prim-bg);
 }
 
 .switch input:checked ~ .switch__shape::before {
@@ -308,7 +299,7 @@ select:focus {
 }
 
 .button {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 18px;
   line-height: 1;
   display: -webkit-box;
@@ -359,7 +350,28 @@ select:focus {
   margin-right: 0;
 }
 
-@-webkit-keyframes apple-appear {
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clr-main-bg);
+  z-index: 10;
+}
+
+/* ========== ANIMATIONS ========== */
+@-webkit-keyframes appleAppear {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes appleAppear {
   from {
     -webkit-transform: scale(0);
             transform: scale(0);
@@ -370,25 +382,14 @@ select:focus {
   }
 }
 
-@keyframes apple-appear {
-  from {
-    -webkit-transform: scale(0);
-            transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-@-webkit-keyframes apple-disappear {
+@-webkit-keyframes appleDisappear {
   from {
   }
   to {
   }
 }
 
-@keyframes apple-disappear {
+@keyframes appleDisappear {
   from {
   }
   to {

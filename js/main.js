@@ -189,7 +189,7 @@ class Apple {
             this.element.style.height = this.blockSize + "px";
 
             this.element.addEventListener("animationend", (e) => {
-                if (e.animationName === "apple-disappear") {
+                if (e.animationName === "appleDisappear") {
                     shnake.gameboard.element.removeChild(e.target);
                 }
             });
@@ -262,7 +262,7 @@ class SnakeBlock {
                 shnake.game.score++;
                 shnake.snake.addBlock(this.previousX, this.previousY);
 
-                shnake.apple.element.classList.add("apple-disappear");
+                shnake.apple.element.classList.add("apple--disappearing");
                 shnake.apple.place();
             } else shnake.gameboard.addAvailableSpot(this.previousX, this.previousY);
 
