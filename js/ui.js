@@ -124,16 +124,18 @@ function createUI() {
     });
 
     startGameButton.addEventListener("click", (e) => {
-        modal.style.display = "none";
+        hideModals();
         shnake.game.init();
     });
 }
 
 function hideModals() {
     const modals = document.querySelectorAll(".modal");
+    const backdrop = document.querySelector(".backdrop");
     modals.forEach((element) => {
         element.style.display = "none";
     });
+    backdrop.style.display = "none";
 }
 
 function showModal(modalType) {
@@ -144,6 +146,9 @@ function showModal(modalType) {
         scoreElements.forEach((element) => {
             element.innerHTML = shnake.game.score;
         });
+    } else if (modalType == "settings") {
+        const backdrop = document.querySelector(".backdrop");
+        backdrop.style.display = "block";
     }
 
     modal.style.display = "block";

@@ -25,10 +25,6 @@ body {
   --clr-text-watermark: rgba(0, 0, 0, 0.04);
   --clr-modal-bg: #ffffff;
   --bdr-modal: none;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--clr-main-bg);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,6 +34,10 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--clr-bounds-bg);
 }
 
 h1 {
@@ -56,7 +56,6 @@ h1 {
           transform: translate(-50%, -50%);
   opacity: 30%;
   font-size: 500px;
-  z-index: -1;
   color: white;
 }
 
@@ -67,7 +66,7 @@ h1 {
 
 .snake-block {
   background: white;
-  z-index: 1;
+  z-index: 2;
   -webkit-transition: -webkit-transform 100ms;
   transition: -webkit-transform 100ms;
   transition: transform 100ms;
@@ -77,6 +76,7 @@ h1 {
 
 .apple {
   background: var(--clr-apple);
+  z-index: 1;
   -webkit-animation: apple-appear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
           animation: apple-appear 500ms forwards cubic-bezier(0, 1.65, 1, 1.65);
 }
@@ -87,9 +87,8 @@ h1 {
 }
 
 .gameboard {
-  border: white 2px solid;
+  background: var(--clr-main-bg);
   position: relative;
-  margin: auto;
 }
 
 .modal {
@@ -98,7 +97,7 @@ h1 {
   top: 50%;
   width: 500px;
   height: 700px;
-  z-index: 10;
+  z-index: 11;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   background: white;
@@ -185,6 +184,16 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--clr-main-bg);
+  z-index: 10;
 }
 
 a {
