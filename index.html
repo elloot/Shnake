@@ -6,7 +6,7 @@
         <title>Shnake 🐍</title>
         <link href="https://unpkg.com/range-slider-element@latest/dist/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/main.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
         <script src="https://unpkg.com/range-slider-element@latest"></script>
@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="modal modal--settings">
-            <h1>Shnake</h1>
+            <h1 class="modal__heading"><em>Shnake</em></h1>
             <div class="form"></div>
             <div class="modal__buttons">
                 <a href="#" id="startGameButton" class="button button--prim"><i class="material-icons">play_arrow</i>Start game</a>
@@ -23,14 +23,24 @@
             </div>
         </div>
         <div class="modal modal--lose">
-            <h1>Game over</h1>
-            <p class="modal__score"></p>
-            <a href="#" class="button button--prim button--restart">Restart</a>
+            <h1 class="modal__heading">
+                <em>Aw snap!</em> You got to <em><span class="modal__score"></span> points,</em> but you can surely do better!
+            </h1>
+            <span class="modal__watermark">Game<br />over</span>
+            <div class="modal__buttons">
+                <a href="#" class="button button--prim button--restart"><i class="material-icons">replay</i>Play again</a>
+                <a href="#" class="button button--scnd button--home"><i class="material-icons">home</i></a>
+            </div>
         </div>
         <div class="modal modal--win">
-            <h1>You won!</h1>
-            <p class="modal__score"></p>
-            <a href="#" class="button button--prim button--restart">Restart</a>
+            <h1 class="modal__heading">
+                <em>Amazing!</em> You covered the entire board and got a perfect score of <em><span class="modal__score"></span> points.</em>
+            </h1>
+            <span class="modal__watermark">Perfect<br />score</span>
+            <div class="modal__buttons">
+                <a href="#" class="button button--prim button--restart"><i class="material-icons">replay</i>Play again</a>
+                <a href="#" class="button button--scnd button--home"><i class="material-icons">home</i></a>
+            </div>
         </div>
         <div class="backdrop"></div>
         <div class="gameboard">

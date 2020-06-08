@@ -36,10 +36,16 @@ body {
 
 h1 {
     font-size: 40px;
-    font-weight: bold;
-    line-height: 1;
-    color: var(--clr-text-accent);
+    font-weight: 600;
+    line-height: 115%;
     margin-bottom: 32px;
+    color: var(--clr-text-soft);
+}
+
+em {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--clr-text-accent);
 }
 
 .score {
@@ -95,6 +101,7 @@ h1 {
     &--win,
     &--lose {
         display: none;
+        overflow: hidden;
     }
     .setting-wrapper {
         display: flex;
@@ -142,6 +149,19 @@ h1 {
         left: 32px;
         right: 32px;
         display: flex;
+    }
+    &__watermark {
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 0;
+        transform: translate(-24px, -50%) rotate(-15deg);
+        z-index: -1;
+        font-weight: bold;
+        font-size: 200px;
+        line-height: 65%;
+        color: var(--clr-text-soft);
+        opacity: 0.03;
     }
 }
 
