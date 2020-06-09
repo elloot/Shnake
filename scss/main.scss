@@ -93,18 +93,20 @@ a {
 
 .modal {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    top: 0;
+    left: 0;
     width: 500px;
-    height: 700px;
+    max-width: 100vw;
+    height: 100vh;
     z-index: 11;
-    transform: translate(-50%, -50%);
     background: white;
     color: var(--clr-text-body);
     border: var(--bdr-modal);
-    border-radius: 20px;
     font-size: 32px;
-    padding: 32px;
+    padding: 16px;
+    transition-property: left, top, transform, height, padding, border-radius;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
     &--win,
     &--lose {
         display: none;
@@ -128,10 +130,12 @@ a {
     }
     &__buttons {
         position: absolute;
-        bottom: 32px;
-        left: 32px;
-        right: 32px;
         display: flex;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 16px;
+        transition: padding 150ms ease-in-out;
     }
     &__watermark {
         position: absolute;
@@ -287,6 +291,22 @@ label {
     bottom: 0;
     background: var(--clr-main-bg);
     z-index: 10;
+}
+
+/* ========== MEDIA QUERIES ========== */
+
+@media screen and (min-width: 500px) {
+    .modal {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 700px;
+        padding: 32px;
+        border-radius: 20px;
+        &__buttons {
+            padding: 32px;
+        }
+    }
 }
 
 /* ========== ANIMATIONS ========== */
