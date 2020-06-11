@@ -268,11 +268,11 @@ class SnakeBlock {
 }
 
 const validSettings = {
-    blockSize: { min: 10, max: 100, default: 50 },
-    updateInterval: { min: 50, max: 1000, default: 150 },
-    testBoolean: { default: false },
-    testString: { default: "Hello!" },
-    testDropdown: { values: ["Lorem", "Ipsum"], default: "Lorem" },
+    blockSize: { min: 10, max: 100, default: 50, step: 10 },
+    updateInterval: { min: 50, max: 1000, default: 150, step: 25 },
+    //testBoolean: { default: false },
+    //testString: { default: "Hello!" },
+    //testDropdown: { values: ["Lorem", "Ipsum"], default: "Lorem" },
 };
 
 // namespace for all game-objects

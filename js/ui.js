@@ -42,6 +42,7 @@ function createUI() {
             inputElement = document.createElement("range-slider");
             inputElement.min = validSettings[setting].min;
             inputElement.max = validSettings[setting].max;
+            inputElement.step = validSettings[setting].step;
 
             const displayElement = document.createElement("input");
             displayElement.type = "number";
