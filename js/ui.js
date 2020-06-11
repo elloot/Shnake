@@ -124,7 +124,6 @@ function createUI() {
     });
 
     startGameButton.addEventListener("click", (e) => {
-        hideModals();
         shnake.game.init();
     });
 }

@@ -41,6 +41,14 @@ class Game {
     }
 
     init() {
+        let toDelete = document.querySelectorAll(".delete-on-restart");
+        toDelete.forEach((element) => {
+            element.remove();
+        });
+        hideModals();
+
+        delete shnake.gameboard, shnake.apple, shnake.snake;
+        this.score = 1;
         this.running = true;
 
         shnake.gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
@@ -113,18 +121,6 @@ class Game {
                     break;
             }
         });
-    }
-
-    restart() {
-        let toDelete = document.querySelectorAll(".delete-on-restart");
-        toDelete.forEach((element) => {
-            element.remove();
-        });
-        hideModals();
-
-        delete shnake.gameboard, shnake.apple, shnake.snake;
-        this.score = 1;
-        this.init();
     }
 
     end(won) {
