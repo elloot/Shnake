@@ -22,7 +22,9 @@ function createUI() {
         inputWrapper.classList.add("input-wrapper");
 
         const labelElement = document.createElement("label");
-        labelElement.textContent = setting;
+        const settingSpaced = setting.replace(/([A-Z])/g, " $1").toLowerCase();
+        const settingSentence = settingSpaced.charAt(0).toUpperCase() + settingSpaced.slice(1);
+        labelElement.textContent = settingSentence;
         labelElement.htmlFor = setting;
 
         let inputElement;
