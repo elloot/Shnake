@@ -2,13 +2,6 @@ window.addEventListener(
     "load",
     (e) => {
         createUI();
-
-        const restartButtons = document.querySelectorAll(".button--restart");
-        restartButtons.forEach((button) => {
-            button.addEventListener("click", (e) => {
-                shnake.game.restart();
-            });
-        });
     },
     false
 );
@@ -107,7 +100,6 @@ function createUI() {
 
     const rangeElements = document.querySelectorAll("range-slider");
     const rangeDisplayElements = document.querySelectorAll(".range-display");
-    const startGameButton = document.querySelector("#startGameButton");
 
     rangeElements.forEach((element) => {
         element.addEventListener("input", (e) => {
@@ -123,8 +115,19 @@ function createUI() {
         });
     });
 
-    startGameButton.addEventListener("click", (e) => {
-        shnake.game.init();
+    const initButtons = document.querySelectorAll(".button--init");
+    initButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            shnake.game.init();
+        });
+    });
+
+    const homeButtons = document.querySelectorAll(".button--home");
+    homeButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            hideModals();
+            showModal("settings");
+        });
     });
 }
 
