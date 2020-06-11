@@ -199,7 +199,7 @@ class Apple {
     }
 }
 
-let applePlace = false;
+//let applePlace = false;
 
 class SnakeBlock {
     constructor(x, y, size) {
@@ -242,9 +242,6 @@ class SnakeBlock {
 
             //only removes an available spot if snake has moved
             if (this.x != this.previousX || this.y != this.previousY) shnake.gameboard.removeAvailableSpot(this.x, this.y);
-
-            //apple chonk detector
-            if (this.x === shnake.apple.x && this.y === shnake.apple.y) applePlace = true;
         }
 
         //set CSS positioning
@@ -255,15 +252,13 @@ class SnakeBlock {
             this.blockBehind.move(this.previousX, this.previousY);
         } else if (this.x != this.previousX || this.y != this.previousY) {
             //only adds an available spot if this block is not the head and if this block has moved
-            if (applePlace) {
+            if (shnake.snake.firstBlock.x === shnake.apple.x && shnake.snake.firstBlock.y === shnake.apple.y) {
                 shnake.game.score++;
                 shnake.snake.addBlock(this.previousX, this.previousY);
 
                 shnake.apple.element.classList.add("apple--disappearing");
                 shnake.apple.place();
             } else shnake.gameboard.addAvailableSpot(this.previousX, this.previousY);
-
-            applePlace = false;
         }
     }
 }
