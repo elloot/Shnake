@@ -49,6 +49,7 @@ class Game {
 
         delete shnake.gameboard, shnake.apple, shnake.snake;
         this.score = 1;
+        this.updateInterval = round(1000 / this.speed, 1);
         this.running = true;
 
         shnake.gameboard = new Gameboard(document.body.clientHeight, document.body.clientWidth);
@@ -269,7 +270,7 @@ class SnakeBlock {
 
 const validSettings = {
     blockSize: { min: 10, max: 100, default: 50, step: 10 },
-    updateInterval: { min: 50, max: 1000, default: 150, step: 25 },
+    speed: { min: 1, max: 20, default: 7, step: 1 },
     //testBoolean: { default: false },
     //testString: { default: "Hello!" },
     //testDropdown: { values: ["Lorem", "Ipsum"], default: "Lorem" },
