@@ -105,13 +105,15 @@ a {
   border: var(--bdr-modal);
   font-size: 32px;
   padding: 16px;
-  transition-property: left, top, transform, height, padding, border-radius;
-  transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
+  transition: transform 500ms cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    left 150ms ease-in-out, top 150ms ease-in-out, height 150ms ease-in-out,
+    padding 150ms ease-in-out, border-radius 150ms ease-in-out;
   &--win,
   &--lose {
-    display: none;
     overflow: hidden;
+  }
+  &--hidden {
+    transform: translateY(100vh);
   }
   .setting-wrapper {
     display: flex;
@@ -293,6 +295,11 @@ label {
   bottom: 0;
   background: var(--clr-main-bg);
   z-index: 10;
+  opacity: 1;
+  transition: opacity 500ms;
+  &--hidden {
+    opacity: 0;
+  }
 }
 
 /* ========== MEDIA QUERIES ========== */
@@ -307,6 +314,9 @@ label {
     border-radius: 20px;
     &__buttons {
       padding: 32px;
+    }
+    &--hidden {
+      transform: translate(-50%, calc(-50% + 100vh));
     }
   }
 }

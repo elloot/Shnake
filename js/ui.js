@@ -144,9 +144,9 @@ function hideModals() {
   const modals = document.querySelectorAll(".modal");
   const backdrop = document.querySelector(".backdrop");
   modals.forEach((element) => {
-    element.style.display = "none";
+    element.classList.add("modal--hidden");
   });
-  backdrop.style.display = "none";
+  backdrop.classList.add("backdrop--hidden");
 }
 
 function showModal(modalType) {
@@ -159,8 +159,8 @@ function showModal(modalType) {
     });
   } else if (modalType == "settings") {
     const backdrop = document.querySelector(".backdrop");
-    backdrop.style.display = "block";
+    backdrop.classList.remove("backdrop--hidden");
   }
 
-  modal.style.display = "block";
+  modal.classList.remove("modal--hidden");
 }
