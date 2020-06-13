@@ -309,6 +309,7 @@ label {
 }
 
 .button {
+  position: relative;
   font-weight: 700;
   font-size: 18px;
   line-height: 1;
@@ -344,11 +345,44 @@ label {
   color: var(--clr-btn-prim-fg);
   background: var(--clr-btn-prim-bg);
   margin-right: 16px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 0 0 #1d7b5b;
+          box-shadow: 0 0 0 0 #1d7b5b;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 
-.button--prim:focus {
-  -webkit-box-shadow: 0 0 6px 2px var(--clr-btn-prim-bg);
-          box-shadow: 0 0 6px 2px var(--clr-btn-prim-bg);
+.button--prim::before, .button--prim::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  opacity: 0.2;
+  width: 50px;
+  height: 100%;
+  z-index: -1;
+  -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+          clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+.button--prim:hover, .button--prim:focus {
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+  -webkit-box-shadow: 0 8px 0 0 var(--clr-bounds-bg);
+          box-shadow: 0 8px 0 0 var(--clr-bounds-bg);
+}
+
+.button--prim:hover::before, .button--prim:focus::before {
+  -webkit-animation: buttonShine 1.5s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+          animation: buttonShine 1.5s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+}
+
+.button--prim:hover::after, .button--prim:focus::after {
+  -webkit-animation: buttonShine 1.5s cubic-bezier(0.21, 0.69, 0.4, 0.99) infinite 0.75s;
+          animation: buttonShine 1.5s cubic-bezier(0.21, 0.69, 0.4, 0.99) infinite 0.75s;
 }
 
 .button--scnd {
@@ -358,6 +392,26 @@ label {
 
 .button--scnd .material-icons {
   margin-right: 0;
+}
+
+.button:hover.button--back-and-forth .material-icons, .button:focus.button--back-and-forth .material-icons {
+  -webkit-animation: backAndForth 1.5s ease-in-out infinite;
+          animation: backAndForth 1.5s ease-in-out infinite;
+}
+
+.button:hover.button--spin .material-icons, .button:focus.button--spin .material-icons {
+  -webkit-animation: spin 1.5s ease-in-out infinite;
+          animation: spin 1.5s ease-in-out infinite;
+}
+
+.button:hover.button--bob .material-icons, .button:focus.button--bob .material-icons {
+  -webkit-animation: bob 1.5s ease-in-out infinite;
+          animation: bob 1.5s ease-in-out infinite;
+}
+
+.button:hover.button--topple .material-icons, .button:focus.button--topple .material-icons {
+  -webkit-animation: topple 1.5s ease-in-out infinite;
+          animation: topple 1.5s ease-in-out infinite;
 }
 
 .backdrop {
@@ -430,6 +484,172 @@ label {
   from {
   }
   to {
+  }
+}
+
+@-webkit-keyframes buttonShine {
+  from {
+    -webkit-transform: translateX(370px);
+            transform: translateX(370px);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes buttonShine {
+  from {
+    -webkit-transform: translateX(370px);
+            transform: translateX(370px);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes backAndForth {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-4px);
+            transform: translateX(-4px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes backAndForth {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(-4px);
+            transform: translateX(-4px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes bob {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  25% {
+    -webkit-transform: rotate(15deg) translateY(-4px);
+            transform: rotate(15deg) translateY(-4px);
+  }
+  50% {
+    -webkit-transform: rotate(0) translateY(2px);
+            transform: rotate(0) translateY(2px);
+  }
+  75% {
+    -webkit-transform: rotate(-15deg) translateY(-4px);
+            transform: rotate(-15deg) translateY(-4px);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
+@keyframes bob {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  25% {
+    -webkit-transform: rotate(15deg) translateY(-4px);
+            transform: rotate(15deg) translateY(-4px);
+  }
+  50% {
+    -webkit-transform: rotate(0) translateY(2px);
+            transform: rotate(0) translateY(2px);
+  }
+  75% {
+    -webkit-transform: rotate(-15deg) translateY(-4px);
+            transform: rotate(-15deg) translateY(-4px);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
+@-webkit-keyframes topple {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  25% {
+    -webkit-transform: translate(4px, -2px) rotate(15deg);
+            transform: translate(4px, -2px) rotate(15deg);
+  }
+  50% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  75% {
+    -webkit-transform: translate(-4px, -2px) rotate(-15deg);
+            transform: translate(-4px, -2px) rotate(-15deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
+@keyframes topple {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  25% {
+    -webkit-transform: translate(4px, -2px) rotate(15deg);
+            transform: translate(4px, -2px) rotate(15deg);
+  }
+  50% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  75% {
+    -webkit-transform: translate(-4px, -2px) rotate(-15deg);
+            transform: translate(-4px, -2px) rotate(-15deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
   }
 }
 /*# sourceMappingURL=main.css.map */

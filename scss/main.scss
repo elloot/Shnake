@@ -252,6 +252,7 @@ label {
 }
 
 .button {
+  position: relative;
   font-weight: 700;
   font-size: 18px;
   line-height: 1;
@@ -274,8 +275,34 @@ label {
     color: var(--clr-btn-prim-fg);
     background: var(--clr-btn-prim-bg);
     margin-right: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 0 rgba(29, 123, 91, 1);
+    transition: all 150ms ease-in-out;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: white;
+      opacity: 0.2;
+      width: 50px;
+      height: 100%;
+      z-index: -1;
+      clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+      transform: translateX(-100%);
+    }
+    &:hover,
     &:focus {
-      box-shadow: 0 0 6px 2px var(--clr-btn-prim-bg);
+      transform: translateY(-10px);
+      box-shadow: 0 8px 0 0 var(--clr-bounds-bg);
+      &::before {
+        animation: buttonShine 1.5s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+      }
+      &::after {
+        animation: buttonShine 1.5s cubic-bezier(0.21, 0.69, 0.4, 0.99) infinite
+          0.75s;
+      }
     }
   }
   &--scnd {
@@ -283,6 +310,29 @@ label {
     background: var(--clr-btn-scnd-bg);
     .material-icons {
       margin-right: 0;
+    }
+  }
+  &:hover,
+  &:focus {
+    &.button--back-and-forth {
+      .material-icons {
+        animation: backAndForth 1.5s ease-in-out infinite;
+      }
+    }
+    &.button--spin {
+      .material-icons {
+        animation: spin 1.5s ease-in-out infinite;
+      }
+    }
+    &.button--bob {
+      .material-icons {
+        animation: bob 1.5s ease-in-out infinite;
+      }
+    }
+    &.button--topple {
+      .material-icons {
+        animation: topple 1.5s ease-in-out infinite;
+      }
     }
   }
 }
@@ -336,5 +386,70 @@ label {
   from {
   }
   to {
+  }
+}
+
+@keyframes buttonShine {
+  from {
+    transform: translateX(370px);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes backAndForth {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes bob {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(15deg) translateY(-4px);
+  }
+  50% {
+    transform: rotate(0) translateY(2px);
+  }
+  75% {
+    transform: rotate(-15deg) translateY(-4px);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes topple {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: translate(4px, -2px) rotate(15deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: translate(-4px, -2px) rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0);
   }
 }
