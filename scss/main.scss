@@ -52,6 +52,11 @@ a {
   color: inherit;
 }
 
+::selection {
+  color: var(--clr-btn-prim-fg);
+  background: var(--clr-btn-prim-bg);
+}
+
 /* ========== GAMEBOARD ========== */
 
 .gameboard {
@@ -152,6 +157,10 @@ a {
     line-height: 65%;
     color: var(--clr-text-heading);
     opacity: 0.03;
+    &::selection {
+      color: unset;
+      background: transparent;
+    }
   }
 }
 
@@ -198,6 +207,7 @@ range-slider {
     background: var(--clr-btn-prim-bg);
   }
 }
+
 label {
   flex-grow: 1;
   font-weight: 400;
@@ -334,6 +344,10 @@ label {
         animation: topple 1.5s ease-in-out infinite;
       }
     }
+  }
+  ::selection {
+    color: unset;
+    background: transparent;
   }
 }
 

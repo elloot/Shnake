@@ -57,6 +57,16 @@ a {
   color: inherit;
 }
 
+::-moz-selection {
+  color: var(--clr-btn-prim-fg);
+  background: var(--clr-btn-prim-bg);
+}
+
+::selection {
+  color: var(--clr-btn-prim-fg);
+  background: var(--clr-btn-prim-bg);
+}
+
 /* ========== GAMEBOARD ========== */
 .gameboard {
   background: var(--clr-main-bg);
@@ -188,6 +198,16 @@ a {
   line-height: 65%;
   color: var(--clr-text-heading);
   opacity: 0.03;
+}
+
+.modal__watermark::-moz-selection {
+  color: unset;
+  background: transparent;
+}
+
+.modal__watermark::selection {
+  color: unset;
+  background: transparent;
 }
 
 input,
@@ -412,6 +432,16 @@ label {
 .button:hover.button--topple .material-icons, .button:focus.button--topple .material-icons {
   -webkit-animation: topple 1.5s ease-in-out infinite;
           animation: topple 1.5s ease-in-out infinite;
+}
+
+.button ::-moz-selection {
+  color: unset;
+  background: transparent;
+}
+
+.button ::selection {
+  color: unset;
+  background: transparent;
 }
 
 .backdrop {
