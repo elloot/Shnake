@@ -361,6 +361,7 @@ label {
   z-index: 10;
   opacity: 1;
   transition: opacity 500ms;
+  pointer-events: none;
   &--hidden {
     opacity: 0;
   }

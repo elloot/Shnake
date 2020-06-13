@@ -455,6 +455,7 @@ label {
   opacity: 1;
   -webkit-transition: opacity 500ms;
   transition: opacity 500ms;
+  pointer-events: none;
 }
 
 .backdrop--hidden {
