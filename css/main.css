@@ -389,8 +389,8 @@ label {
 }
 
 .button--prim:hover, .button--prim:focus {
-  -webkit-transform: translateY(-10px);
-          transform: translateY(-10px);
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
   -webkit-box-shadow: 0 8px 0 0 var(--clr-bounds-bg);
           box-shadow: 0 8px 0 0 var(--clr-bounds-bg);
 }
