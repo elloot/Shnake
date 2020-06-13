@@ -84,8 +84,9 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 500px;
+  transform: translate(-50%, calc(-50% - 0.09em));
+  font-family: "Ubuntu Mono";
+  font-size: 300px;
   color: var(--clr-score);
 }
 
