@@ -94,9 +94,10 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  font-size: 500px;
+  -webkit-transform: translate(-50%, calc(-50% - 0.09em));
+          transform: translate(-50%, calc(-50% - 0.09em));
+  font-family: "Ubuntu Mono";
+  font-size: 300px;
   color: var(--clr-score);
 }
 
