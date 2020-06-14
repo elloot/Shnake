@@ -7,7 +7,6 @@ window.addEventListener(
 );
 
 function createUI() {
-  const modal = document.querySelector(".modal--settings");
   const form = document.querySelector(".form");
 
   for (const setting in validSettings) {
@@ -102,6 +101,8 @@ function createUI() {
         ? parseInt(value)
         : value;
     });
+
+    showModal("settings");
   }
 
   const rangeElements = document.querySelectorAll("range-slider");
@@ -147,6 +148,7 @@ function hideModals() {
     element.classList.add("modal--hidden");
   });
   backdrop.classList.add("backdrop--hidden");
+  setTabbable();
 }
 
 function showModal(modalType) {
@@ -163,4 +165,23 @@ function showModal(modalType) {
   }
 
   modal.classList.remove("modal--hidden");
+  setTabbable(modalType);
+}
+
+function setTabbable(modalType) {
+  const interactiveElements = document.querySelectorAll(
+    "input, range-slider, .button"
+  );
+  interactiveElements.forEach((element) => {
+    element.setAttribute("tabindex", "-1");
+  });
+
+  if (modalType) {
+    const tabbableElements = document.querySelectorAll(
+      `.modal--${modalType} input, .modal--${modalType} range-slider, .modal--${modalType} .button`
+    );
+    tabbableElements.forEach((element) => {
+      element.setAttribute("tabindex", "0");
+    });
+  }
 }
