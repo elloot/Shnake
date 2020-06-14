@@ -139,6 +139,12 @@ function createUI() {
       showModal("settings");
     });
   });
+
+  tippy("[data-tippy-content]", {
+    animation: "scale",
+    duration: 150,
+    inertia: true,
+  });
 }
 
 function hideModals() {

@@ -19,9 +19,12 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/tippy-scale.css" />
     <script src="js/hammer.min.js"></script>
     <script src="js/range-slider-element.min.js"></script>
     <script src="js/odometer.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/tippy.min.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/ui.js"></script>
   </head>
@@ -35,7 +38,10 @@
           class="button button--prim button--init button--back-and-forth"
           ><i class="material-icons">play_arrow</i>Start game</a
         >
-        <a href="#" class="button button--scnd button--bob"
+        <a
+          href="#"
+          class="button button--scnd button--bob"
+          data-tippy-content="Share your custom settings"
           ><i class="material-icons">share</i></a
         >
       </div>
@@ -51,7 +57,10 @@
         <a href="#" class="button button--prim button--init button--spin"
           ><i class="material-icons">replay</i>Play again</a
         >
-        <a href="#" class="button button--scnd button--home button--topple"
+        <a
+          href="#"
+          class="button button--scnd button--home button--topple"
+          data-tippy-content="Back to Home"
           ><i class="material-icons">home</i></a
         >
       </div>
@@ -66,7 +75,10 @@
         <a href="#" class="button button--prim button--init button--spin"
           ><i class="material-icons">replay</i>Play again</a
         >
-        <a href="#" class="button button--scnd button--home button--topple"
+        <a
+          href="#"
+          class="button button--scnd button--home button--topple"
+          data-tippy-content="Back to Home"
           ><i class="material-icons">home</i></a
         >
       </div>
