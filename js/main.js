@@ -23,10 +23,20 @@ class Snake {
   setXDirection(vx) {
     this.firstBlock.vx = vx;
     this.firstBlock.vy = 0;
+    if (vx === -1) {
+      shnake.audio.play("move3");
+    } else if (vx === 1) {
+      shnake.audio.play("move1");
+    }
   }
   setYDirection(vy) {
     this.firstBlock.vy = vy;
     this.firstBlock.vx = 0;
+    if (vy === -1) {
+      shnake.audio.play("move4");
+    } else if (vy === 1) {
+      shnake.audio.play("move2");
+    }
   }
 }
 
@@ -349,6 +359,10 @@ shnake.audio = new Howl({
     click: [19000, 300],
     whoosh1: [20000, 600],
     whoosh2: [21000, 600],
+    move1: [22000, 200],
+    move2: [22500, 200],
+    move3: [23000, 200],
+    move4: [23500, 200],
   },
 });
 
