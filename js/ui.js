@@ -129,6 +129,7 @@ function createUI() {
   initButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       shnake.game.init();
+      shnake.audio.play("startGame");
     });
   });
 
@@ -137,6 +138,22 @@ function createUI() {
     button.addEventListener("click", (e) => {
       hideModals();
       showModal("settings");
+    });
+  });
+
+  const interactiveElements = document.querySelectorAll(
+    "input, range-slider, .button"
+  );
+  interactiveElements.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      shnake.audio.play("click");
+    });
+  });
+
+  const buttonElements = document.querySelectorAll(".button");
+  buttonElements.forEach((element) => {
+    element.addEventListener("mouseenter", (e) => {
+      shnake.audio.play("hover");
     });
   });
 

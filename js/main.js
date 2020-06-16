@@ -165,6 +165,7 @@ class Game {
 
   end(won) {
     showModal(won ? "win" : "lose");
+    shnake.audio.play(won ? "perfectScore" : "gameOver");
     this.running = false;
   }
 }
