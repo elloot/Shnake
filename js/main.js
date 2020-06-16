@@ -341,6 +341,13 @@ shnake.audio = new Howl({
     eat10: [9000, 600],
     eat11: [10000, 600],
     eat12: [11000, 600],
+    gameOver: [12000, 900],
+    perfectScore: [13000, 2700],
+    startGame: [16000, 1600],
+    hover: [18000, 500],
+    click: [19000, 300],
+    whoosh1: [20000, 600],
+    whoosh2: [21000, 600],
   },
 });
 
