@@ -299,6 +299,12 @@ class SnakeBlock {
         shnake.snake.firstBlock.x === shnake.apple.x &&
         shnake.snake.firstBlock.y === shnake.apple.y
       ) {
+        shnake.audio.play(
+          `eat${
+            shnake.game.score - 12 * Math.floor(shnake.game.score / 12) || 12
+          }`
+        );
+
         shnake.game.score++;
         shnake.snake.addBlock(this.previousX, this.previousY);
 
@@ -320,6 +326,23 @@ const validSettings = {
 // namespace for all game-objects
 let shnake = {};
 shnake.game = new Game(parseSettings());
+shnake.audio = new Howl({
+  src: ["audio/sounds.mp3"],
+  sprite: {
+    eat1: [0, 600],
+    eat2: [1000, 600],
+    eat3: [2000, 600],
+    eat4: [3000, 600],
+    eat5: [4000, 600],
+    eat6: [5000, 600],
+    eat7: [6000, 600],
+    eat8: [7000, 600],
+    eat9: [8000, 600],
+    eat10: [9000, 600],
+    eat11: [10000, 600],
+    eat12: [11000, 600],
+  },
+});
 
 let lastTime = new Date().getTime();
 let deltaUpdate = 0;
