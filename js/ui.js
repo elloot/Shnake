@@ -141,12 +141,27 @@ function createUI() {
     });
   });
 
-  const interactiveElements = document.querySelectorAll(
-    "input, range-slider, .button"
-  );
+  tippy("[data-tippy-content]", {
+    animation: "scale",
+    duration: 150,
+    inertia: true,
+  });
+
+  addUISounds();
+}
+
+function addUISounds() {
+  const interactiveElements = document.querySelectorAll("input, .button");
   interactiveElements.forEach((element) => {
     element.addEventListener("click", (e) => {
       shnake.audio.play("click");
+    });
+  });
+
+  const rangeSliderElements = document.querySelectorAll("range-slider");
+  rangeSliderElements.forEach((element) => {
+    element.addEventListener("input", (e) => {
+      shnake.audio.play("input");
     });
   });
 
@@ -155,12 +170,6 @@ function createUI() {
     element.addEventListener("mouseenter", (e) => {
       shnake.audio.play("hover");
     });
-  });
-
-  tippy("[data-tippy-content]", {
-    animation: "scale",
-    duration: 150,
-    inertia: true,
   });
 }
 
