@@ -180,6 +180,7 @@ function hideModals() {
     element.classList.add("modal--hidden");
   });
   backdrop.classList.add("backdrop--hidden");
+  shnake.audio.play("whoosh1");
   setTabbable();
 }
 
@@ -197,6 +198,10 @@ function showModal(modalType) {
   }
 
   modal.classList.remove("modal--hidden");
+  if (modalType != "settings") {
+    shnake.audio.play("whoosh1");
+  }
+
   setTabbable(modalType);
 }
 
